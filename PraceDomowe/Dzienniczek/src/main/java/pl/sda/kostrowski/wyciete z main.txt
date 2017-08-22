@@ -1,0 +1,135 @@
+
+
+        //test czy działa przypisanie ocen losowych
+        System.out.println("+++++++++++++++++++++++++++++");
+        System.out.println("Blok testujący dodawanie ocen");
+
+        Integer ocenyTemp[] = studentJuniors[1].getBiologyGrades();
+        System.out.println("Przed dodaniem oceny");
+        for (int i = 0; i < 10; i++) {
+            if (ocenyTemp[i] == (null)) {
+                break;
+            }
+            System.out.print(ocenyTemp[i] + "; ");
+        }
+
+        GradesJuniorImpl studentTemp = new GradesJuniorImpl(studentJuniors[1]);
+
+        studentTemp.addGrade(6, "Biology");
+
+        System.out.println();
+        System.out.println("Po dodaniu oceny");
+        for (int i = 0; i < 20; i++) {
+            if (ocenyTemp[i] == (null)) {
+                break;
+            }
+            System.out.print(ocenyTemp[i] + "; ");
+        }
+
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        System.out.println("+++++++++++++++++++++++++++++");
+        System.out.println("Blok testujący dodawanie uwag");
+
+        RemarksJuniorImpl studentTempRemarks = new RemarksJuniorImpl(studentJuniors[1]);
+
+        String uwagiTemp[] = studentJuniors[1].getStudentRemarks();
+        System.out.println("Przed dodaniem uwagi");
+        for (int i = 0; i < 10; i++) {
+            if (uwagiTemp[i] == (null)) {
+                break;
+            }
+            System.out.print(uwagiTemp[i] + "; ");
+        }
+
+
+        studentTempRemarks.addRemark("Nowa Uwaga");
+
+        System.out.println();
+        System.out.println("Po dodaniu uwagi");
+        for (int i = 0; i < 20; i++) {
+            if (uwagiTemp[i] == (null)) {
+                break;
+            }
+            System.out.print(uwagiTemp[i] + "; ");
+        }
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        System.out.println("+++++++++++++++++++++++++++++");
+        System.out.println("Blok testujący czy student ma uwagi");
+
+        InDangerJuniorImpl studentTestInDanger1 = new InDangerJuniorImpl(studentJuniors[1]);
+        InDangerJuniorImpl studentTestInDanger2 = new InDangerJuniorImpl(studentJuniors[2]);
+
+
+        System.out.println("Student " + studentJuniors[1] + " jest grzeczny: " + studentTestInDanger1.isNotNice());
+        System.out.println("Student " + studentJuniors[2] + " jest grzeczny: " + studentTestInDanger2.isNotNice());
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        System.out.println("+++++++++++++++++++++++++++++");
+        System.out.println("Blok testujący czy student zda");
+
+
+        if (studentTestInDanger1.willPass()) {
+            System.out.println("Student zda");
+        } else System.out.println("Student obleje");
+
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        System.out.println("+++++++++++++++++++++++++++++");
+        System.out.println("Blok testujący wyszukiwanie i znajdowanie niedostatecznych");
+
+        Integer indexOfFoundStudent;
+
+        FindJuniorStudent studentTestInDanger3 = new FindJuniorStudent(studentJuniors);
+        studentTestInDanger3.findStudentPos("Imie1", "Nazwisko1");
+
+        indexOfFoundStudent = studentTestInDanger3.findStudentPos("Imie1", "Nazwisko1");
+
+        InDangerJuniorImpl studentTestInDanger5 = new InDangerJuniorImpl(studentJuniors[indexOfFoundStudent]);
+
+
+        ocenyTemp = studentJuniors[indexOfFoundStudent].getBiologyGrades();
+        System.out.print("Oceny z biologii: ");
+        for (int i = 0; i < 10; i++) {
+            if (ocenyTemp[i] == (null)) {
+                break;
+            }
+            System.out.print(ocenyTemp[i] + "; ");
+        }
+        ocenyTemp = studentJuniors[indexOfFoundStudent].getMathGrades();
+        System.out.print("Oceny z matmy: ");
+        for (int i = 0; i < 10; i++) {
+            if (ocenyTemp[i] == (null)) {
+                break;
+            }
+            System.out.print(ocenyTemp[i] + "; ");
+        }
+
+        ocenyTemp = studentJuniors[indexOfFoundStudent].getScienceGrades();
+        System.out.print("Oceny z fizyki: ");
+        for (int i = 0; i < 10; i++) {
+            if (ocenyTemp[i] == (null)) {
+                break;
+            }
+            System.out.print(ocenyTemp[i] + "; ");
+        }
+
+
+        System.out.println();
+
+        System.out.println("Liczba niedostatecznych z biologii: " + studentTestInDanger5.howManyVeryBadScoresBiology());
+        System.out.println("Liczba niedostatecznych z matmy: " + studentTestInDanger5.howManyVeryBadScoresMaths());
+        System.out.println("Liczba niedostatecznych z fizyki: " + studentTestInDanger5.howManyVeryBadScoresScience());

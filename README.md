@@ -1,1 +1,1 @@
-# notatki
+Moje notatki i prace domowe z kursu

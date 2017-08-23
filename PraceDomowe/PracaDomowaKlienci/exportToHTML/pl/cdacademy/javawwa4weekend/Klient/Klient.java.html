@@ -1,0 +1,111 @@
+<html>
+<head>
+<title>Klient.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(128,128,128); font-style: italic; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,0); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Klient.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">package </span><span class="s1">pl.cdacademy.javawwa4weekend.Klient; 
+ 
+</span><span class="s0">import </span><span class="s1">java.util.LinkedList; 
+ 
+ 
+</span><span class="s0">public class </span><span class="s1">Klient { 
+ 
+    </span><span class="s2">//chciałem mieć indywidualny identyfikator dla każdego klienta</span><span class="s1"> 
+    </span><span class="s0">private static </span><span class="s1">Integer id = </span><span class="s3">0</span><span class="s1">; 
+    </span><span class="s0">private </span><span class="s1">Integer idKlient; 
+    </span><span class="s2">//koniec chcenia</span><span class="s1"> 
+ 
+    </span><span class="s0">private </span><span class="s1">String name; 
+    </span><span class="s0">private </span><span class="s1">String surname; 
+    </span><span class="s0">private </span><span class="s1">Integer age; 
+    </span><span class="s0">private </span><span class="s1">Double[] expenseInMonths = </span><span class="s0">new </span><span class="s1">Double[</span><span class="s3">12</span><span class="s1">]; 
+ 
+ 
+    </span><span class="s2">//to powinna być cecha klienta (dzięki temu liczy się raz</span><span class="s1"> 
+    </span><span class="s2">//aktualizować powinno się przy zmianie wydatków, ale tego nie robię</span><span class="s1"> 
+    </span><span class="s2">//bo nie definiuję wydatków</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Double totalSpend; 
+ 
+    </span><span class="s2">//chcę mieć wszystkich zainicjowanych klientów w jednej liście</span><span class="s1"> 
+    </span><span class="s2">//bo wtedy mogę korzystać z pętli for-each</span><span class="s1"> 
+    </span><span class="s0">private static </span><span class="s1">LinkedList&lt;Klient&gt; listaKlientow = </span><span class="s0">new </span><span class="s1">LinkedList&lt;Klient&gt;(); 
+ 
+ 
+    </span><span class="s0">public </span><span class="s1">Klient(String name, String surname, Integer age) { 
+        </span><span class="s0">this</span><span class="s1">.name = name; 
+        </span><span class="s0">this</span><span class="s1">.surname = surname; 
+        </span><span class="s0">this</span><span class="s1">.age = age; 
+        listaKlientow.add(</span><span class="s0">this</span><span class="s1">); 
+ 
+        </span><span class="s2">// tak na wszelki wypadek</span><span class="s1"> 
+        totalSpend = </span><span class="s3">0.0</span><span class="s1">; 
+ 
+        </span><span class="s2">// indywidualne ID</span><span class="s1"> 
+        </span><span class="s2">// to zachcianka z caveofprogramming.com</span><span class="s1"> 
+        </span><span class="s0">this</span><span class="s1">.id++; 
+        idKlient = </span><span class="s0">this</span><span class="s1">.id; 
+ 
+    } 
+ 
+    </span><span class="s0">public static </span><span class="s1">LinkedList&lt;Klient&gt; getListaKlientow() { 
+        </span><span class="s0">return </span><span class="s1">listaKlientow; 
+    } 
+ 
+ 
+    </span><span class="s0">public void </span><span class="s1">setExpenseInMonth(Integer month, Double expenseInMonth) { 
+        </span><span class="s0">this</span><span class="s1">.expenseInMonths[month] = expenseInMonth; 
+    } 
+ 
+    </span><span class="s0">public </span><span class="s1">Double getExpenseInMonth(Integer month) { 
+        </span><span class="s0">return </span><span class="s1">expenseInMonths[month]; 
+    } 
+ 
+    </span><span class="s0">public </span><span class="s1">Double getTotalSpend() { 
+        </span><span class="s0">return </span><span class="s1">totalSpend; 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">setTotalSpend(Double totalSpend) { 
+        </span><span class="s0">this</span><span class="s1">.totalSpend = totalSpend; 
+    } 
+ 
+    </span><span class="s2">// tylko do debugu i sprawdzenia czy działa jak należy</span><span class="s1"> 
+    </span><span class="s0">public void </span><span class="s1">printExpenses() { 
+        System.out.println(</span><span class="s0">this</span><span class="s1">); 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s3">0</span><span class="s1">; i &lt; </span><span class="s3">12</span><span class="s1">; i++) { 
+            System.out.print(</span><span class="s0">this</span><span class="s1">.getExpenseInMonth(i) + </span><span class="s4">&quot; &quot;</span><span class="s1">); 
+        } 
+        System.out.println(); 
+ 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public </span><span class="s1">String toString() { 
+        </span><span class="s0">return  </span><span class="s1">name + </span><span class="s4">&quot; &quot; </span><span class="s1">+ surname + </span><span class="s4">&quot; w wieku &quot; </span><span class="s1">+ age + </span><span class="s4">&quot; lat, łączne wydatki: &quot; </span><span class="s1">+ totalSpend; 
+    } 
+ 
+} 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+</span></pre>
+</body>
+</html>

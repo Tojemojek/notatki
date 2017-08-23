@@ -1,0 +1,149 @@
+<html>
+<head>
+<title>Main.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(128,128,128); font-style: italic; }
+.s3 { color: rgb(0,128,0); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Main.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">package </span><span class="s1">pl.cdacademy.javawwa4weekend; 
+ 
+</span><span class="s0">import </span><span class="s1">pl.cdacademy.javawwa4weekend.Calculations.Additional; 
+</span><span class="s0">import </span><span class="s1">pl.cdacademy.javawwa4weekend.Calculations.Compute; 
+</span><span class="s0">import </span><span class="s1">pl.cdacademy.javawwa4weekend.Klient.Klient; 
+ 
+</span><span class="s0">import </span><span class="s1">java.util.LinkedList; 
+ 
+ 
+</span><span class="s2">//</span><span class="s1"> 
+</span><span class="s2">//- klienta (imię, nazwisko, wiek, łączna kwota zakupów),</span><span class="s1"> 
+</span><span class="s2">//        który wydał najwięcej pieniędzy na zakupy</span><span class="s1"> 
+</span><span class="s2">//        - klienta (imię, nazwisko, wiek, łączna kwota zakupów),</span><span class="s1"> 
+</span><span class="s2">//        który wydał najmniej pieniędzy na zakupy</span><span class="s1"> 
+</span><span class="s2">//        - dla klienta, który miał największe zakupy, wskazać miesiąc,</span><span class="s1"> 
+</span><span class="s2">//        w którym wydał najmniejszą kwotę</span><span class="s1"> 
+</span><span class="s2">//        - dla klienta, który mial najmniejsze zakupy, wskazać miesiąc,</span><span class="s1"> 
+</span><span class="s2">//        w którym wydał największą sumę.</span><span class="s1"> 
+ 
+</span><span class="s0">public class </span><span class="s1">Main { 
+ 
+    </span><span class="s0">private static final </span><span class="s1">String[] NAZWY_MIESIECY = {</span><span class="s3">&quot;Styczeń&quot;</span><span class="s1">, </span><span class="s3">&quot;Luty&quot;</span><span class="s1">, </span><span class="s3">&quot;Marzec&quot;</span><span class="s1">, </span><span class="s3">&quot;Kwiecień&quot;</span><span class="s1">, </span><span class="s3">&quot;Maj&quot;</span><span class="s1">, </span><span class="s3">&quot;Czerwiec&quot;</span><span class="s1">, </span><span class="s3">&quot;Lipiec&quot;</span><span class="s1">, 
+            </span><span class="s3">&quot;Sierpień&quot;</span><span class="s1">, </span><span class="s3">&quot;Wrzesień&quot;</span><span class="s1">, </span><span class="s3">&quot;Październik&quot;</span><span class="s1">, </span><span class="s3">&quot;Listopad&quot;</span><span class="s1">, </span><span class="s3">&quot;Grudzień&quot;</span><span class="s1">}; 
+ 
+    </span><span class="s0">public static void </span><span class="s1">main(String[] args) { 
+ 
+        Klient bestCustomer; 
+        Klient worstCustomer; 
+        </span><span class="s0">int </span><span class="s1">bestMonth; 
+        </span><span class="s0">int </span><span class="s1">worstMonth; 
+        Double[] averageValuesInMonths; 
+ 
+ 
+        Klient klient1 = </span><span class="s0">new </span><span class="s1">Klient(</span><span class="s3">&quot;Jan&quot;</span><span class="s1">, </span><span class="s3">&quot;Nowak&quot;</span><span class="s1">, </span><span class="s4">19</span><span class="s1">); 
+        Klient klient2 = </span><span class="s0">new </span><span class="s1">Klient(</span><span class="s3">&quot;Janek&quot;</span><span class="s1">, </span><span class="s3">&quot;Nowaczek&quot;</span><span class="s1">, </span><span class="s4">23</span><span class="s1">); 
+        Klient klient3 = </span><span class="s0">new </span><span class="s1">Klient(</span><span class="s3">&quot;Janeczek&quot;</span><span class="s1">, </span><span class="s3">&quot;Nowakowski&quot;</span><span class="s1">, </span><span class="s4">45</span><span class="s1">); 
+        Klient klient4 = </span><span class="s0">new </span><span class="s1">Klient(</span><span class="s3">&quot;Janeczuniek&quot;</span><span class="s1">, </span><span class="s3">&quot;Nowaczyk&quot;</span><span class="s1">, </span><span class="s4">72</span><span class="s1">); 
+        Klient klient5 = </span><span class="s0">new </span><span class="s1">Klient(</span><span class="s3">&quot;Inny&quot;</span><span class="s1">, </span><span class="s3">&quot;Świat&quot;</span><span class="s1">, </span><span class="s4">58</span><span class="s1">); 
+ 
+        </span><span class="s0">for </span><span class="s1">(Klient klientTmp: Klient.getListaKlientow()) { 
+            Compute.generateRandomExpences(klientTmp); 
+            Compute.totalSpendMoney(klientTmp); 
+        } 
+ 
+        System.out.println(</span><span class="s3">&quot;++++++++++++Do sprawdzenia poprawności++++++++++++++++++&quot;</span><span class="s1">); 
+ 
+        </span><span class="s0">for </span><span class="s1">(Klient klientTmp: Klient.getListaKlientow()) { 
+            klientTmp.printExpenses(); 
+        } 
+ 
+        System.out.println(</span><span class="s3">&quot;++++++++++++Koniec sprawdzania poprawności++++++++++&quot;</span><span class="s1">); 
+ 
+ 
+ 
+        bestCustomer = Compute.findBestCustomer(Klient.getListaKlientow()); 
+        worstCustomer = Compute.findWorstCustomer(Klient.getListaKlientow()); 
+ 
+        bestMonth = Compute.findBestMonth(worstCustomer); 
+        worstMonth = Compute.findWorstMonth(bestCustomer); 
+ 
+ 
+ 
+        System.out.println(</span><span class="s3">&quot;+++++++++++++++++++++++++++++++++++++++++++++++&quot;</span><span class="s1">); 
+        System.out.println(); 
+        System.out.println(</span><span class="s3">&quot;Najlepszym klientem jest: &quot; </span><span class="s1">+ bestCustomer); 
+        System.out.println(</span><span class="s3">&quot;A jego najgorszym miesiącem jest: &quot; </span><span class="s1">+ NAZWY_MIESIECY[worstMonth]); 
+        System.out.println(</span><span class="s3">&quot;W którym zrobił obrót: &quot; </span><span class="s1">+ bestCustomer.getExpenseInMonth(worstMonth)); 
+        System.out.println(); 
+        System.out.println(</span><span class="s3">&quot;+++++++++++++++++++++++++++++++++++++++++++++++&quot;</span><span class="s1">); 
+        System.out.println(); 
+        System.out.println(</span><span class="s3">&quot;Najgorszym klientem jest: &quot; </span><span class="s1">+ worstCustomer); 
+        System.out.println(</span><span class="s3">&quot;A jego najlepszym miesiącem jest: &quot; </span><span class="s1">+ NAZWY_MIESIECY[bestMonth]); 
+        System.out.println(</span><span class="s3">&quot;W którym zrobił obrót: &quot; </span><span class="s1">+ worstCustomer.getExpenseInMonth(bestMonth)); 
+ 
+ 
+ 
+        System.out.println(); 
+        System.out.println(); 
+        System.out.println(); 
+ 
+ 
+        averageValuesInMonths = Additional.averageInMonths(Klient.getListaKlientow()); 
+ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s1">; i&lt;</span><span class="s4">12</span><span class="s1">;i++){ 
+            System.out.println(</span><span class="s3">&quot;Średni obrót w miesiącu &quot; </span><span class="s1">+ NAZWY_MIESIECY[i]); 
+            System.out.println(averageValuesInMonths[i]); 
+        } 
+ 
+ 
+ 
+ 
+ 
+ 
+        </span><span class="s2">//        // ten fragment tylko po to żeby każdemu klientowi przypisać określone zakupy</span><span class="s1"> 
+</span><span class="s2">//        Double[] expences1 = {0.36, 465.46, 356.46, 624.8, 911.82, 650.75, 188.88, 5.41, 82.11, 962.0, 573.67, 11.89};</span><span class="s1"> 
+</span><span class="s2">//        Double[] expences2 = {269.61, 114.34, 329.9, 221.14, 276.54, 580.09, 409.02, 415.64, 447.25, 331.24, 840.76, 210.31};</span><span class="s1"> 
+</span><span class="s2">//        Double[] expences3 = {736.29, 537.85, 412.92, 486.81, 226.32, 993.84, 884.91, 366.72, 472.4, 365.84, 327.62, 600.49};</span><span class="s1"> 
+</span><span class="s2">//        Double[] expences4 = {153.5, 336.47, 902.11, 972.57, 382.43, 392.75, 954.35, 512.88, 572.54, 337.87, 749.19, 382.94};</span><span class="s1"> 
+</span><span class="s2">//</span><span class="s1"> 
+</span><span class="s2">//        for (int i = 0; i &lt; 12; i++) {</span><span class="s1"> 
+</span><span class="s2">//            klient1.setExpenseInMonth(i, expences1[i]);</span><span class="s1"> 
+</span><span class="s2">//            klient2.setExpenseInMonth(i, expences2[i]);</span><span class="s1"> 
+</span><span class="s2">//            klient3.setExpenseInMonth(i, expences3[i]);</span><span class="s1"> 
+</span><span class="s2">//            klient4.setExpenseInMonth(i, expences4[i]);</span><span class="s1"> 
+</span><span class="s2">//        }</span><span class="s1"> 
+</span><span class="s2">//        // do tego miejsca</span><span class="s1"> 
+ 
+</span><span class="s2">//        Compute.generateRandomExpences(klient1);</span><span class="s1"> 
+</span><span class="s2">//        Compute.generateRandomExpences(klient2);</span><span class="s1"> 
+</span><span class="s2">//        Compute.generateRandomExpences(klient3);</span><span class="s1"> 
+</span><span class="s2">//        Compute.generateRandomExpences(klient4);</span><span class="s1"> 
+</span><span class="s2">//</span><span class="s1"> 
+</span><span class="s2">//        Compute.totalSpendMoney(klient1);</span><span class="s1"> 
+</span><span class="s2">//        Compute.totalSpendMoney(klient2);</span><span class="s1"> 
+</span><span class="s2">//        Compute.totalSpendMoney(klient3);</span><span class="s1"> 
+</span><span class="s2">//        Compute.totalSpendMoney(klient4);</span><span class="s1"> 
+</span><span class="s2">//</span><span class="s1"> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    } 
+} 
+</span></pre>
+</body>
+</html>

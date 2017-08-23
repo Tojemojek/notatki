@@ -1,0 +1,117 @@
+<html>
+<head>
+<title>Compute.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Compute.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">package </span><span class="s1">pl.cdacademy.javawwa4weekend.Calculations; 
+ 
+</span><span class="s0">import </span><span class="s1">pl.cdacademy.javawwa4weekend.Klient.Klient; 
+ 
+</span><span class="s0">import </span><span class="s1">java.util.LinkedList; 
+</span><span class="s0">import </span><span class="s1">java.util.Random; 
+ 
+ 
+</span><span class="s0">public class </span><span class="s1">Compute { 
+ 
+    </span><span class="s0">private static final </span><span class="s1">Double MIN_EXPENCES = </span><span class="s2">1000.00</span><span class="s1">; 
+    </span><span class="s0">private static final </span><span class="s1">Double MAX_EXPENCES = </span><span class="s2">10000.00</span><span class="s1">; 
+ 
+ 
+    </span><span class="s0">public static void </span><span class="s1">totalSpendMoney(Klient klient) { 
+ 
+        klient.setTotalSpend(</span><span class="s2">0.0</span><span class="s1">); 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s1">; i &lt; </span><span class="s2">12</span><span class="s1">; i++) { 
+            klient.setTotalSpend(klient.getTotalSpend() + klient.getExpenseInMonth(i)); 
+        } 
+    } 
+ 
+    </span><span class="s0">public static void </span><span class="s1">generateRandomExpences(Klient klient) { 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s1">; i &lt; </span><span class="s2">12</span><span class="s1">; i++) { 
+            Double randomExpense; 
+            randomExpense = MIN_EXPENCES + (MAX_EXPENCES - MIN_EXPENCES) * Math.random(); 
+            klient.setExpenseInMonth(i, randomExpense); 
+        } 
+ 
+    } 
+ 
+    </span><span class="s0">public static </span><span class="s1">Klient findBestCustomer(LinkedList&lt;Klient&gt; listaKlientow) { 
+ 
+        Klient tempBestKlient; 
+        tempBestKlient = listaKlientow.getFirst(); 
+ 
+        </span><span class="s0">for </span><span class="s1">(Klient klientTmp : listaKlientow) { 
+            </span><span class="s0">if </span><span class="s1">(klientTmp.getTotalSpend() &gt; tempBestKlient.getTotalSpend()) { 
+                tempBestKlient = klientTmp; 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                tempBestKlient = tempBestKlient; 
+            } 
+        } 
+ 
+        </span><span class="s0">return </span><span class="s1">tempBestKlient; 
+ 
+    } 
+ 
+ 
+    </span><span class="s0">public static </span><span class="s1">Klient findWorstCustomer(LinkedList&lt;Klient&gt; listaKlientow) { 
+ 
+        Klient findWorstCustomer; 
+        findWorstCustomer = listaKlientow.getFirst(); 
+ 
+        </span><span class="s0">for </span><span class="s1">(Klient klientTmp : listaKlientow) { 
+            </span><span class="s0">if </span><span class="s1">(klientTmp.getTotalSpend() &lt; findWorstCustomer.getTotalSpend()) { 
+                findWorstCustomer = klientTmp; 
+            } 
+        } 
+ 
+        </span><span class="s0">return </span><span class="s1">findWorstCustomer; 
+ 
+    } 
+ 
+    </span><span class="s0">public static int </span><span class="s1">findBestMonth(Klient klient) { 
+ 
+        </span><span class="s0">int </span><span class="s1">tmpBestMonth = </span><span class="s2">0</span><span class="s1">; 
+ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s1">; i &lt; </span><span class="s2">12</span><span class="s1">; i++) { 
+ 
+            </span><span class="s0">if </span><span class="s1">(klient.getExpenseInMonth(i) &gt; klient.getExpenseInMonth(tmpBestMonth)) { 
+                tmpBestMonth = i; 
+            } 
+ 
+        } 
+        </span><span class="s0">return </span><span class="s1">tmpBestMonth; 
+ 
+    } 
+ 
+    </span><span class="s0">public static int </span><span class="s1">findWorstMonth(Klient klient) { 
+ 
+        </span><span class="s0">int </span><span class="s1">tmpWorstMonth = </span><span class="s2">0</span><span class="s1">; 
+ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s1">; i &lt; </span><span class="s2">12</span><span class="s1">; i++) { 
+ 
+            </span><span class="s0">if </span><span class="s1">(klient.getExpenseInMonth(i) &lt; klient.getExpenseInMonth(tmpWorstMonth)) { 
+                tmpWorstMonth = i; 
+            } 
+ 
+        } 
+        </span><span class="s0">return </span><span class="s1">tmpWorstMonth; 
+ 
+    } 
+ 
+ 
+} 
+</span></pre>
+</body>
+</html>

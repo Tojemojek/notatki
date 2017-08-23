@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Additional.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Additional.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">package </span><span class="s1">pl.cdacademy.javawwa4weekend.Calculations; 
+ 
+</span><span class="s0">import </span><span class="s1">pl.cdacademy.javawwa4weekend.Klient.Klient; 
+</span><span class="s0">import </span><span class="s1">java.util.LinkedList; 
+ 
+ 
+ 
+</span><span class="s0">public class </span><span class="s1">Additional { 
+ 
+ 
+    </span><span class="s0">public static </span><span class="s1">Double[] averageInMonths (LinkedList&lt;Klient&gt; listaKlientow){ 
+ 
+        Double[] averageValuesInMonths = </span><span class="s0">new </span><span class="s1">Double[</span><span class="s2">12</span><span class="s1">]; 
+ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s1">; i&lt;</span><span class="s2">12</span><span class="s1">; i++){ 
+            averageValuesInMonths[i] = </span><span class="s2">0.0</span><span class="s1">; 
+ 
+            </span><span class="s0">for </span><span class="s1">(Klient klientTmp : listaKlientow) { 
+ 
+                averageValuesInMonths[i] +=klientTmp.getExpenseInMonth(i); 
+ 
+ 
+            } 
+ 
+            averageValuesInMonths[i] = averageValuesInMonths[i]/listaKlientow.size(); 
+ 
+ 
+        } 
+ 
+        </span><span class="s0">return </span><span class="s1">averageValuesInMonths; 
+ 
+    } 
+ 
+} 
+</span></pre>
+</body>
+</html>

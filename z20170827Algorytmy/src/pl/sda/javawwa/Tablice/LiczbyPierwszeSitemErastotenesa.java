@@ -1,4 +1,4 @@
-package pl.sda.javawwa.Tablice;
+package pl.sda.javawwa.tablice;
 
 import java.util.Scanner;
 

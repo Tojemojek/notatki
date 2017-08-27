@@ -1,4 +1,4 @@
-package pl.sda.javawwa.Tablice;
+package pl.sda.javawwa.tablice;
 
 import java.util.Scanner;
 
@@ -35,9 +35,5 @@ public class LiczbyPierwszeSitemErastotenesaBool2 {
             if (!dane[i])
                 System.out.print(i + ", ");
         }
-
     }
 }
-
-
-

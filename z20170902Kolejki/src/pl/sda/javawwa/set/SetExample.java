@@ -11,7 +11,6 @@ public class SetExample {
 
     public static void main(String[] args) {
 
-
         //hash set nie pozwala na dodanie duplikatów
         //do stwierdzenia że ten sam obiekt używa metody equals
         //każda klasa ma metodę equals która jest z klasy object
@@ -21,8 +20,6 @@ public class SetExample {
         //hash set nie pozwala na dodanie duplikatów
         //do stwierdzenia że ten sam obiekt używa metody compareTo
         Set<Person2> peopleTree = new TreeSet<>();
-
-        
 
 
         Person2 osoba1 = createPerson2("Albert", "Albertcik", JobPosition.ANALYST, "Wiejska", 15);
@@ -48,16 +45,14 @@ public class SetExample {
         peopleTree.add(osoba5);
 
         System.out.println("\nWyświetlenie HashSet");
-        for (Person2 prsTmp: peopleHash){
+        for (Person2 prsTmp : peopleHash) {
             System.out.println(prsTmp);
         }
 
         System.out.println("\nWyświetlenie TreeSet");
-        for (Person2 prsTmp: peopleTree){
+        for (Person2 prsTmp : peopleTree) {
             System.out.println(prsTmp);
         }
-
-
     }
 
     private static Person2 createPerson2(String name, String surname, JobPosition jobposition, String ulica, int nrDomu) {

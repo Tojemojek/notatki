@@ -1,6 +1,7 @@
 package pl.sda.javawwa.myLinkedList;
 
 import java.util.Iterator;
+import java.util.stream.Stream;
 
 public class MyLinkedList<T> implements Iterable<T> {
 
@@ -29,13 +30,17 @@ public class MyLinkedList<T> implements Iterable<T> {
                 return false;
             }
             if (tmpNode.equals(after)) {
+                if (after.equals(tail.getElement())) {
+                    add(t);
+                    return true;
+                } else {
+                    MyNode<T> tmpNewNode = new MyNode<T>();
+                    tmpNewNode.setElement(t);
 
-                MyNode<T> tmpNewNode = new MyNode<T>();
-                tmpNewNode.setElement(t);
-
-                tmpNewNode.setNext(tmpNode.getNext());
-                tmpNode.setNext(tmpNewNode);
-                return true;
+                    tmpNewNode.setNext(tmpNode.getNext());
+                    tmpNode.setNext(tmpNewNode);
+                    return true;
+                }
             }
 
             tmpNode = tmpNode.getNext();
@@ -44,6 +49,25 @@ public class MyLinkedList<T> implements Iterable<T> {
 
     }
 
+
+    public void removeHead() {
+
+        if (head == null) {
+            tail = null;
+            System.out.println("Brak elementów do usunięcia");
+        } else if (head.getElement().equals(tail.getElement())) {
+            tail = null;
+            head = null;
+
+        } else {
+            head = head.getNext();
+        }
+    }
+
+    public void removeTail() {
+
+
+    }
 
     public void traverse() {
 
@@ -77,9 +101,22 @@ public class MyLinkedList<T> implements Iterable<T> {
             }
         };
     }
-}
 
-//stream do zaimplementowania
-//Stream <T> stream(){
-// return
-//}
+    Stream<T> stream() {
+
+        Stream.Builder<T> builder = Stream.builder();
+        MyNode<T> tmp = head;
+
+        while (true) {
+            if (tmp == null) {
+                break;
+            }
+            builder.add(tmp.getElement());
+            tmp = tmp.getNext();
+        }
+
+        return builder.build();
+    }
+
+
+}

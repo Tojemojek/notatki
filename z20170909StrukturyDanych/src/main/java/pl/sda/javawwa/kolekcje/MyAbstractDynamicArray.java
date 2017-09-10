@@ -12,12 +12,12 @@ public abstract class MyAbstractDynamicArray<T>{
 
 
     public MyAbstractDynamicArray() {
-        array = (T[]) new Object[2];
+        array = (T[]) new Comparable[2];
         maxIndex = 1;
     }
 
     public MyAbstractDynamicArray(int initialSize) {
-        array = (T[]) new Object[initialSize];
+        array = (T[]) new Comparable[initialSize];
         maxIndex = initialSize - 1;
     }
 

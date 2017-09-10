@@ -2,7 +2,7 @@ package pl.sda.javawwa.kolekcjeTest;
 
 import pl.sda.javawwa.kolekcje.MyStack;
 
-public class MainStact {
+public class MainStack {
 
 
     public static void main(String[] args) {

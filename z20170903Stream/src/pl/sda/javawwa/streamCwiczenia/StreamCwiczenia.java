@@ -143,5 +143,67 @@ public class StreamCwiczenia {
         System.out.println(String.format("Mężczyzn jest %d, kobiet %d", maleCount, femaleCount));
 
 
+
+
+
+        System.out.println("\nŚrednia zarobków dla danego stanowiska stream");
+
+        Map<String, Double> daneDoSrZarobkow = mojeOsobyTestowe.stream()
+                .collect(Collectors.groupingBy(s -> s.getOccupation(), Collectors.averagingInt(s -> s.getSalary())));
+
+        daneDoSrZarobkow.entrySet().forEach(s ->
+                System.out.print(String.format("\nZawód %s, średnia %f",
+                        s.getKey(), s.getValue())));
+
+
+        System.out.println("\nŚrednia zarobków dla danego stanowiska for Each");
+        Map<String, Integer[]> daneDoSrZarobkowFE = new TreeMap<>();
+
+        for (Person osobaTmp : mojeOsobyTestowe) {
+            if (daneDoSrZarobkowFE.containsKey(osobaTmp.getOccupation())) {
+                Integer[] tmpDblArr = {0, 0};
+                tmpDblArr[0] = daneDoSrZarobkowFE.get(osobaTmp.getOccupation())[0] + osobaTmp.getSalary();
+                tmpDblArr[1] = daneDoSrZarobkowFE.get(osobaTmp.getOccupation())[1] + 1;
+                daneDoSrZarobkowFE.replace(osobaTmp.getOccupation(), tmpDblArr);
+            } else {
+                Integer[] tmpDblArr = {0, 0};
+                tmpDblArr[0] = osobaTmp.getSalary();
+                tmpDblArr[1] = 1;
+                daneDoSrZarobkowFE.put(osobaTmp.getOccupation(), tmpDblArr);
+            }
+        }
+
+        daneDoSrZarobkowFE.entrySet().forEach(s ->
+                System.out.print(String.format("\nZawód %s, liczba pracujących w zawodzie %d, łączne zarobki %d, średnia %f",
+                        s.getKey(), s.getValue()[1], s.getValue()[0], 1.0 * s.getValue()[0] / s.getValue()[1])));
+
+
+         System.out.println("\nIlość osób pracujących w danym mieście stream");
+
+        Map<String, Long> dataNoOfPeopleInCities = mojeOsobyTestowe.stream()
+                .collect(Collectors.groupingBy(s -> s.getCity(), Collectors.counting()));
+
+        dataNoOfPeopleInCities.entrySet()
+                .forEach(s->System.out.println(String.format("Miasto - %s, mieszkańców - %d",s.getKey(),s.getValue())));
+
+        System.out.println("\nIlość osób pracujących w danym mieście for Each");
+
+        Map<String, Integer> dataNoOfPeopleInCities2 =new TreeMap<>();
+
+        for (Person p: mojeOsobyTestowe){
+            if (dataNoOfPeopleInCities2.containsKey(p.getCity())) {
+                dataNoOfPeopleInCities2.replace(p.getCity(), dataNoOfPeopleInCities2.get(p.getCity())+1);
+            } else {
+                dataNoOfPeopleInCities2.put(p.getCity(), 1);
+            }
+
+        }
+
+
+        dataNoOfPeopleInCities2.entrySet()
+                .forEach(s->System.out.println(String.format("Miasto - %s, mieszkańców - %d",s.getKey(),s.getValue())));
+
+
+
     }
 }

@@ -11,10 +11,6 @@ public class PersonaConverter {
 
     private static Random randomGenerator = new Random();
 
-    private static Integer generateSalary() {
-        return randomGenerator.nextInt(100000);
-    }
-
     private static Integer integerOrNull(String value) {
 
         try {
@@ -38,7 +34,7 @@ public class PersonaConverter {
                     String city = line[3];
                     Gender gender = Gender.getGender(line[0]);
                     String occupation = line[10].replaceAll("\"","");
-                    Integer salary = generateSalary();
+                    Integer salary = integerOrNull(line[11]);
                     return new Person(name,surname,age,city,gender,occupation,salary);
                 }).collect(Collectors.toList());
     }

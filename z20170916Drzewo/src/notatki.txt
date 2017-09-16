@@ -17,7 +17,8 @@ nie przechowuje duplikatów
 
 
 praca domowa
-iterator
-stream
+iterator zrobiony
+stream zrobiony
+
 do zrobienia TreeMap -> np. niech zawiera w sobie binary tree które zawiera obiekt specjalny zawierający parę
 

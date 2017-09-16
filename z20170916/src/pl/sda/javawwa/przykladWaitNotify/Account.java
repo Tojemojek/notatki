@@ -1,4 +1,4 @@
-package pl.sda.javawwa.przykladWaitNotify;
+﻿package pl.sda.javawwa.przykladWaitNotify;
 
 public class Account {
 

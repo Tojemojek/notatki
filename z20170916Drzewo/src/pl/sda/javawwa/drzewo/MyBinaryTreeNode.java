@@ -4,8 +4,16 @@ public class MyBinaryTreeNode<T> {
 
     private MyBinaryTreeNode<T> leftChild;
     private MyBinaryTreeNode<T> rightChild;
+    private MyBinaryTreeNode<T> parent;
     private T value;
 
+    public void setParent(MyBinaryTreeNode<T> parent) {
+        this.parent = parent;
+    }
+
+    public MyBinaryTreeNode<T> getParent() {
+        return parent;
+    }
 
     public MyBinaryTreeNode(T value) {
         this.value = value;
@@ -38,5 +46,10 @@ public class MyBinaryTreeNode<T> {
     @Override
     public String toString() {
         return value.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return value.equals((T)obj);
     }
 }

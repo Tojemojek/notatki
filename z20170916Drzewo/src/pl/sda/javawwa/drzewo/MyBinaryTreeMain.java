@@ -1,5 +1,7 @@
 package pl.sda.javawwa.drzewo;
 
+import java.util.Iterator;
+
 public class MyBinaryTreeMain {
 
 
@@ -23,22 +25,58 @@ public class MyBinaryTreeMain {
         System.out.println("\nWyświetlenie drzewa inOrderTraversal");
         mbt.inOrderTraversal();
 
-        System.out.println("\nPróba dodania duplikatu");
+        System.out.println("\n\nPróba dodania duplikatu");
         mbt.add(10);
-        System.out.println("\nWyświetlenie drzewa posortowanego");
+
+        System.out.println("\nCzy w drzewie jest 17 " + mbt.contains(17));
+        System.out.println("Czy w drzewie jest 999 " + mbt.contains(999));
+
+        System.out.println("\n\nWyświetlenie drzewa inOrderTraversal");
         mbt.inOrderTraversal();
 
-        System.out.println("\nCzy w drzewie jest 17? " + mbt.contains(17));
-        System.out.println("\nCzy w drzewie jest 999? " + mbt.contains(999));
-
-
-        System.out.println("\nWyświetlenie drzewa postOrderTraversal");
+        System.out.println("\n\nWyświetlenie drzewa postOrderTraversal");
         mbt.postOrderTraversal();
 
-        System.out.println("\nWyświetlenie drzewa preOrderTraversal");
+        System.out.println("\n\nWyświetlenie drzewa preOrderTraversal");
         mbt.preOrderTraversal();
 
-        System.out.println("\nWielkość drzewa " + mbt.size());
+        System.out.println("\n\nWielkość drzewa " + mbt.size());
+
+
+        System.out.println("\nTest czy udało się zbudować stream ");
+
+        mbt.stream()
+                .forEach(s-> System.out.print(s + " "));
+
+        System.out.println("\n\nIteracyjne przejście przez drzewo ");
+        mbt.PrintAllIteracyjnie();
+
+        System.out.println("\n\nTest iteratora");
+        Iterator<Integer> it = mbt.iterator();
+
+        System.out.println("Info - dodano 3 dodatkowe wartości");
+
+        mbt.add(99);
+        mbt.add(48);
+        mbt.add(1);
+
+        System.out.println("\nWyświetlenie elementów  ");
+        while (it.hasNext()) {
+            System.out.print(it.next() + " ");
+        }
+
+
+        System.out.println("\n\nZliczanie elementów dzięki iteratorowi");
+        Integer countElements = 0;
+
+        Iterator<Integer> it2 = mbt.iterator();
+        while (it2.hasNext()) {
+            countElements++;
+            it2.next();
+        }
+
+        System.out.println(String.format("W drzewie jest %d elementów", countElements));
+
 
     }
 }

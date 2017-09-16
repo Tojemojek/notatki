@@ -1,0 +1,23 @@
+Drzewo - sposób przechowania danych
+składa się z węzłów
+
+każdy węzeł przechowuje dane o sobie i następnikach - ile jest nastepnych zależy od typu drzewa
+
+drzwo binarne ma 2 węzły następujące
+
+root - korzeń - pierwszy węzeł
+leaf - elementy które nie mają następnych
+
+In Order - Lewo Root Right
+
+np. treeset
+automatycznie posortowany (wymaga żeby elementy implementowały comparable)- złożoność obliczeniowa logarytmiczna
+szybkie wyszukiwanie
+nie przechowuje duplikatów
+
+
+praca domowa
+iterator
+stream
+do zrobienia TreeMap -> np. niech zawiera w sobie binary tree które zawiera obiekt specjalny zawierający parę
+

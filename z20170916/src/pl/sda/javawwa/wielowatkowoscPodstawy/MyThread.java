@@ -1,4 +1,4 @@
-package pl.sda.javawwa.wielowatkowosc;
+package pl.sda.javawwa.wielowatkowoscPodstawy;
 
 public class MyThread extends Thread {
 

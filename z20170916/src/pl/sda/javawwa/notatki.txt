@@ -1,0 +1,31 @@
+Thread - wątek - pojedyncze zadanie - lekki ma dostęp do zasobów
+Proces - zbiór wielu wątków
+
+jenkov tutorials concurency
+
+metoda join - zapobiega przerwaniu wątku - trzeba czekać aż się skończy
+metoda start - TWORZY tak naprawdę wątek uruchamia metodę run
+metoda run - po prostu wywołuje metodę
+dwa razy wywołania wątku metodą start nie jest możliwe pokazuje się wyjątek
+IllegalThreadStateException
+
+słówko kluczowe "synchronized" oznacza że metoda musi być wykonana do końca przez wątek
+nie może być w żaden sposób współdzielona
+
+słówko synchronized tylko do metod i do bloków kodu w metodach
+
+kolekcje typu vector mają metody synchronizowane, arraylist nie.
+vectory są bezpieczne w środowisku wielowątkowym
+array listy nie
+
+StringBuilder - niesynchronizowany
+StringBuffer - jest synchronizowany
+
+Przy metodach statycznych blok synchronizowany musi mieć inne blokowanie - nie do konkretnego obiektu ale do całej klasy.
+
+metoda wait blokuje bieżący wątek aż inny wątek wywoła notify
+
+
+
+
+

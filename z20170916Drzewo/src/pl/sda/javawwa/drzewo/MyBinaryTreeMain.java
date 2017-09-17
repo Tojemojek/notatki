@@ -54,17 +54,23 @@ public class MyBinaryTreeMain {
         System.out.println("\n\nTest iteratora");
         Iterator<Integer> it = mbt.iterator();
 
-        System.out.println("Info - dodano 3 dodatkowe wartości");
+        System.out.println("Info - dodano 5 dodatkowych wartości");
 
         mbt.add(99);
         mbt.add(48);
         mbt.add(1);
 
-        System.out.println("\nWyświetlenie elementów  ");
+        mbt.add(18);
+        mbt.add(19);
+
+
+        System.out.println("\nWyświetlenie elementów korzystając z iteratora ");
         while (it.hasNext()) {
             System.out.print(it.next() + " ");
         }
 
+        System.out.println("\n\nIteracyjne przejście przez drzewo korzystając z funkcji iteracyjnie przechodzących ");
+        mbt.PrintAllIteracyjnie();
 
         System.out.println("\n\nZliczanie elementów dzięki iteratorowi");
         Integer countElements = 0;

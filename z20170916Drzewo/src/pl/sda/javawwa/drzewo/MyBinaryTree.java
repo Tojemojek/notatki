@@ -149,8 +149,13 @@ public class MyBinaryTree<T extends Comparable<T>> implements Iterable<T> {
             tmp = findSmallest(tmp);
         } else if (tmp.getParent().getValue().compareTo(currentMin.getValue()) > 0) {
             tmp = tmp.getParent();
+        } else if (tmp.getParent() == root) {
+            tmp = root;
         } else {
-            tmp = tmp.getParent().getParent();
+            while (tmp.getParent().getRightChild()==tmp) {
+                tmp = tmp.getParent();
+            }
+            tmp = tmp.getParent();
         }
         return tmp;
     }
@@ -174,7 +179,7 @@ public class MyBinaryTree<T extends Comparable<T>> implements Iterable<T> {
 
         while (howManyPrinted < size) {
             tmp = findGreaterThan(tmp);
-            System.out.print(tmp.getValue()+ " ");
+            System.out.print(tmp.getValue() + " ");
             howManyPrinted++;
         }
     }

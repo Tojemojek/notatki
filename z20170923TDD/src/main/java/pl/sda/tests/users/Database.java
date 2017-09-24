@@ -24,8 +24,8 @@ public class Database {
     }
 
     public User getUser(String username) throws UserNotExistException {
-        for(User user : users){
-            if(user.getUsername().equals(username)){
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
                 return user;
             }
         }
@@ -35,4 +35,18 @@ public class Database {
     public Set<User> getUsers() {
         return users;
     }
+
+
+    public boolean login(User user) {
+
+        try {
+            if (getUser(user.getUsername()).equals(user)) {
+                return true;
+            }
+        } catch (UserNotExistException e) {
+            return false;
+        }
+            return false;
+    }
+
 }

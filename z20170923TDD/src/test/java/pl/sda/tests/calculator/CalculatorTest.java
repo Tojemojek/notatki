@@ -70,13 +70,16 @@ public class CalculatorTest {
 
         int result1 = calculator.divide(15, 5);
         int result2 = calculator.divide(-15, 5);
-        int result3 = calculator.divide(15, 0);
-        int result4 = calculator.divide(0, 0);
 
         assertEquals(3, result1);
         assertEquals(-3, result2);
-        assertEquals(0, result3);
-        assertEquals(0, result4);
+
+    }
+
+    @Test (expected = ArithmeticException.class)
+    public void testDivideByZero() {
+
+        int result1 = calculator.divide(15, 0);
 
     }
 

@@ -1,6 +1,7 @@
 package pl.sda.tests.fibonacci;
 
 public class Fibonacci {
+
     public static int compute(int n) {
         int result = 0;
 

@@ -1,9 +1,7 @@
 package pl.sda.tests.calculator;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.rules.ExpectedException;
 import pl.sda.tests.calculator.Calculator;
 
 import static org.junit.Assert.assertEquals;
@@ -76,9 +74,22 @@ public class CalculatorTest {
 
     }
 
-    @Test (expected = ArithmeticException.class)
+
+    @Test(expected = ArithmeticException.class)
     public void testDivideByZero() {
 
+        int result1 = calculator.divide(15, 0);
+
+    }
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test()
+    public void testDivideByZero2() {
+
+        thrown.expect(ArithmeticException.class);
+        thrown.expectMessage("Wartość dzielnika = 0");
         int result1 = calculator.divide(15, 0);
 
     }

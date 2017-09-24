@@ -7,7 +7,9 @@ import org.junit.rules.ExpectedException;
 import pl.sda.tests.users.exceptions.UserExistsException;
 import pl.sda.tests.users.exceptions.UserNotExistException;
 
-import java.rmi.server.ExportException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -86,4 +88,19 @@ public class DatabaseTest {
     }
 
 
+    @Test
+    public void getUserOutOfBounds() throws IndexOutOfBoundsException, UserExistsException{
+
+        bazaDoTestow.addUser(new User("Marcin2", "bbb"));
+        bazaDoTestow.addUser(new User("Rafał2", "ccc"));
+
+        Set<User> users = bazaDoTestow.getUsers();
+        List<User> mojaLista = new ArrayList<>();
+
+        mojaLista.addAll(users);
+
+        thrown.expect(IndexOutOfBoundsException.class);
+        User ko = mojaLista.get(10);
+
+    }
 }

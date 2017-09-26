@@ -1,0 +1,137 @@
+jUnit
+
+adnotacje:
+@BeforeClass metoda wykonywana przed wszystkimi testami, uruchamiana zawsze raz
+@Before metoda wykonywana przed każdym testem
+@Test oznaczenie testu
+@After metoda wykonywana po każdym teście
+@AfterClass metoda wykonywana po wykonaniu wszystkich testach, uruchamiana zawsze raz
+@Ignore Ignorowanie	(wyłączenie testu)
+
+zasada
+//given
+//when
+//then
+
+testy sparametryzowane jUnit
+@RunWith(value = Parameterized.class)
+
+inicjalizacja parametrów:
+
+    //w zapisach poniżej {index} - to zapis "z biblioteki" i oznacza
+    //kolejny "zestaw" danych testowych (liczone od 0)
+    //a {0}, {1} to miejsce gdzie będzie wstawiony kolejny element zestawu danych testowych
+    //np. dla zestawów {19, 4181} zamiast {0} będzie 19 a zamiast {1} będzie 4181
+    //to działa dla wektora danych
+    @Parameters(name = "testowany {index}, oczekiwany wynik {0}")
+    public static Iterable<? extends Object> data() {
+        return Arrays.asList(0, 1,);
+    }
+
+    //to działa dla tablicy danych
+    @Parameters(name = "testowany {index}, oczekiwany wynik {0}")
+    public static Collection<Object[]> data() {
+    return Arrays.asList(new Object[][]{
+                {0, 0},
+                {1, 1},
+                {19, 4181}
+            });
+        }
+
+potem do wyboru 2 podejścia
+albo konstruktor, ale klasa musi mieć pola lokalne:
+
+    public FibonacciTest2(int noOfElement, int correctResult) {
+        this.noOfElement = noOfElement;
+        this.correctResult = correctResult;
+    }
+
+    albo adnotacja @Parameter - dla parametru 0 i @Parameter(x) dla parametru x > 0
+
+    @Parameter
+    public int noOfElement;
+
+    @Parameter(1)
+    public int correctResult;
+
+i dopiero mając to - można testować używając zmiennych
+noOfElement i correctResult
+
+JUnitParams
+inny provider:
+@RunWith(JUnitParamsRunner.class)
+
+składnia testu
+ @Test
+ @junitparams.Parameters({"0, 0", "1, 1", "19, 4181"})
+
+ gdzie kolejne paramtery podajemy po przecinku w jednym stringu
+
+
+ jUnit testowanie wyjątków:
+ metoda 1
+ try - catch - fail - jeśli kod dojdzie do fail to nie jest zaliczony test
+
+         try {
+             bazaDoTestow.removeUser(new User("asdsadas", "aaa"));
+             fail("This user does not exist so this should not happen");
+         } catch (UserNotExistException e) {
+             e.printStackTrace();
+         }
+
+ metoda 2
+ @Test(expected = wyjątekKtóregoSięSpodziewam.class)
+
+    @Test(expected = UserExistsException.class)
+    public void testAddUserAgain() throws UserExistsException {
+        bazaDoTestow.addUser(new User("Krzysiek", "aaa"));
+    }
+
+ metoda 3
+ adnotacja @Rule
+
+ @Rule
+     public ExpectedException thrown = ExpectedException.none();
+
+     @Test
+     public void getUser() throws Exception {
+         thrown.expect(UserNotExistException.class);
+         thrown.expectMessage("User with username " + "aSDFFAFDA" + "does not exist in database");
+         bazaDoTestow.getUser("aSDFFAFDA");
+     }
+
+
+
+ AssertJ
+
+ Bardziej złożone asercje, możliwość chainowania
+        assertThat(bazaDoTestow.getUsers()).hasSize(4)
+                .contains(new User("Marcin", "bbb"))
+                .doesNotContain(new User("niema", "bbb"));
+
+ Możliwość dawania bardziej złożonych komunikatów o błędach po słowie kluczowym as
+
+        assertThat(bazaDoTestow.getUser("aaa"))
+                .as("Sprawdź imię %s", bazaDoTestow.getUser("aaa")
+                        .getUsername()).isEqualTo(u1);
+
+
+Mockito - biblioteka to mockowania obiektów
+Tworzy się atrapy i można udawać ich zachowania w różnych warunkach:
+
+    Database mockBazaDoTestow;
+    User mockUser;
+    mockBazaDoTestow = mock(Database.class);
+    mockUser = mock(User.class);
+    when(mockUser.getUsername()).thenReturn("Krzysztof1");
+    when(mockBazaDoTestow.getUser("Krzysztof")).thenReturn( new User("Krzysztof", "aaa"));
+
+
+można badać czy były wywoływane metody na naszych atrapach i ile razy były wykonywane
+
+        User user1 = new User("Krzysztof", "aaa");
+        mockBazaDoTestow.addUser(user1);
+
+        verify(mockBazaDoTestow).addUser(user1);
+        verify(mockBazaDoTestow,times(1)).addUser(user1);
+

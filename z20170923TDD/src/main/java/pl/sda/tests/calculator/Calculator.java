@@ -26,4 +26,18 @@ public class Calculator {
 
         return answer;
     }
+
+
+    public boolean pair(int a) {
+        return (a % 2 == 0);
+    }
+
+    public int squared(int a) {
+        return (a*a);
+    }
+
+    public double brutto(int a, int b) {
+        return (1.0*a*(1+(1.0*b/100)));
+    }
+
 }

@@ -13,7 +13,6 @@ public class Main {
         Book testBook2 = new Book("Autor2", "Tytuł2", 5.6);
         Book testBook3 = new Book("Autor3", "Tytuł2", 8.0);
 
-
         mb.addToBasket(testBook1);
         mb.addToBasket(testBook2);
         mb.addToBasket(testBook3);
@@ -21,7 +20,7 @@ public class Main {
 
         System.out.println(mb);
 
-        Set<Book> books = mb.setOfBooksInBasket();
+        Set<Book> books = mb.getSetOfBooksInBasket();
 
         for (Book book : books) {
             System.out.println(book);

@@ -8,7 +8,6 @@ import org.junit.Test;
 public class BookTest {
 
 
-
     @Before
     public void setUp() throws Exception {
     }
@@ -53,6 +52,18 @@ public class BookTest {
     }
 
 
+    @Test
+    public void testGetPrice() throws Exception {
+
+        String tytuł = "TestowyTytuł";
+        String autor = "TestowyAutor";
+        Double cena = 25.22;
+
+        Book testBook = new Book(autor, tytuł, cena);
+
+        Assert.assertEquals(cena, testBook.getPrice());
+
+    }
 
 
     @After

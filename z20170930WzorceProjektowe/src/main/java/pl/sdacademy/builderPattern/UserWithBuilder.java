@@ -7,6 +7,7 @@ public class UserWithBuilder {
     private final String phone; // optional
     private final String address; // optional
 
+
     private UserWithBuilder(UserBuilder builder) {
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
@@ -65,5 +66,16 @@ public class UserWithBuilder {
         public UserWithBuilder build() {
             return new UserWithBuilder(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "UserWithBuilder{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }

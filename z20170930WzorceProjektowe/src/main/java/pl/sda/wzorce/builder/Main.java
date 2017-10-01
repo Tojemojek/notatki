@@ -2,8 +2,6 @@ package pl.sda.wzorce.builder;
 
 public class Main {
 
-
-
     public static void main(String[] args) {
 
         System.out.println("To jest pierwszy obiekt zbudowany builderem");
@@ -16,9 +14,5 @@ public class Main {
         cb2.colour("Czerwony");
         cb2.shape("Walcowy");
         System.out.println(cb2.build());
-
-
     }
-
-
 }

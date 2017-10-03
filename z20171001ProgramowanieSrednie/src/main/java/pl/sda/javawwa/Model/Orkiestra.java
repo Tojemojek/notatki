@@ -57,7 +57,6 @@ public class Orkiestra {
         for (Muzyk muzyk : muzycy) {
             Runnable gr = () -> {
                 for (int i = 0; i < (czasKoncertu * 1000 / muzyk.getInterwal()); i++) {
-                    System.out.println(Thread.currentThread().getName());
                     muzyk.graj();
                     try {
                         Thread.sleep(muzyk.getInterwal());

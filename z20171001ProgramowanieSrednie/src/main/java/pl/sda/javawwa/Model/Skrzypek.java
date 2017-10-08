@@ -10,8 +10,19 @@ public class Skrzypek extends Muzyk {
 
     @Override
     public void graj() {
-        System.out.println("Jestem " + super.getImięINazwisko() + " i mój instrument to " + INSTRUMENT);
+        Runnable gr = () -> {
+            while(true) {
+                System.out.println("Jestem " + getImięINazwisko() +
+                        " i mój instrument to " + INSTRUMENT+ " i gram co " + getInterwal());
+                try {
+                    Thread.sleep(getInterwal());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        Thread mojWatekMuzyka = new Thread(gr);
+        mojWatekMuzyka.setDaemon(true);
+        mojWatekMuzyka.start();
     }
-
-
 }

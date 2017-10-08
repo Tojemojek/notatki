@@ -6,9 +6,6 @@ public abstract class Muzyk {
     private String imięINazwisko;
     private int interwal;
 
-    public int getInterwal() {
-        return interwal;
-    }
 
     public Muzyk(String imięINazwisko, int interwal) {
         this.imięINazwisko = imięINazwisko;
@@ -19,6 +16,9 @@ public abstract class Muzyk {
         return imięINazwisko;
     }
 
+    public int getInterwal() {
+        return interwal;
+    }
 
     abstract public void graj();
 

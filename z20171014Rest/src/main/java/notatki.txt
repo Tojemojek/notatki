@@ -1,0 +1,39 @@
+﻿mvn jetty:run - tym się uruchamia -->
+advanced rest client
+
+Openshift - darmowe serwery gdzie można ładować war
+ApacheTomcat to serwer "produkcyjny"
+
+Aplikacja webowa jest obsługiwana za pomocą url.
+4 metody GET, POST, PUT, DELETE.
+
+Przeglądarka wysyła zawsze żadanie
+
+każda aplikacja webowa musi mieć endpoint - adres
+
+ten adres odbiera dane metodami GET lub POST
+
+kontroler przyjmuje dane z zewnątrz obrabia je i przekazuje do odpowiednich metod / instancji
+
+wyciąganie danych z systemu = get
+zmieniają stan = put
+tworzą nowe = post
+
+różnica metoda (modyfikuje stan) - funkcja (nie modyfikuje stanu);
+
+strictfp - chodzi o dokładność matematyczną -
+wtedy nie ma różnic między architekturami procesorów w obliczeniach
+
+metoda synchronizowana jest to równoważnik synchronized.this
+
+kolejność sekcji importów w dependency w pom maven ma znaczenie dla kolejności class.path - idzie w tej kolejności co importy.
+
+Atomowe operacje - jeden wątek wykonuje je od początku do końca
+
+AtomicInteger - ukrywa synchronizację.
+
+powtórzyć Future.
+
+
+
+

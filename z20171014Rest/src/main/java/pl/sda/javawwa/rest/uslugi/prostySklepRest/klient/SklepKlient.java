@@ -105,11 +105,6 @@ public class SklepKlient implements SklepInterface {
 
     }
 
-    @Override
-    public void kupProdukt(int id) {
-
-    }
-
 
 
     private String wywolajGet(String sciezka) {

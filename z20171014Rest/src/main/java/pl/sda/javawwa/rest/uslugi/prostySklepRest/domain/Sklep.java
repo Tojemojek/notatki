@@ -35,10 +35,6 @@ public class Sklep implements SklepInterface, ZamowienieInterface {
         magazyn.remove(id);
     }
 
-    @Override
-    public void kupProdukt(int id) {
-        //ToDo dopisać sensowną implementację
-    }
 
     private int generujId() {
         return counter++;
@@ -57,10 +53,19 @@ public class Sklep implements SklepInterface, ZamowienieInterface {
         return zamowienia.get(idZamowienia);
     }
 
+    public Collection<UUID> pokazZamowienia() {
+        return zamowienia.keySet();
+    }
+
     @Override
     public Zamowienie dodajProdukt(UUID idZamowienia, int idProduktu, int ilosc) {
-        //ToDo dopisać sensowną implementację
-        return null;
+        if (zamowienia.containsKey(idZamowienia) && magazyn.containsKey(idProduktu)) {
+            Zamowienie zamowienieTmp = zamowienia.get(idZamowienia);
+            OrderItem orderItem = new OrderItem(magazyn.get(idProduktu), ilosc);
+            zamowienieTmp.addItemToZamowienie(orderItem);
+            zamowienia.replace(idZamowienia,zamowienieTmp);
+        }
+        return zamowienia.get(idZamowienia);
     }
 
     @Override

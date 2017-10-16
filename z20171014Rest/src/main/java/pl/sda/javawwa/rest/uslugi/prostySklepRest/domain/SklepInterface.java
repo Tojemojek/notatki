@@ -12,7 +12,4 @@ public interface SklepInterface {
 
     void usunProdukt(int id);
 
-    void kupProdukt(int id);
-
-
 }

@@ -8,6 +8,7 @@ import pl.sda.javawwa.rest.uslugi.prostySklepRest.domain.SklepInterface;
 import javax.ws.rs.*;
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.UUID;
 
 @Path("/sklep")
 public class SklepSerwis implements SklepInterface {
@@ -45,14 +46,29 @@ public class SklepSerwis implements SklepInterface {
         sklep.usunProdukt(id);
     }
 
-    @Override
-    public void kupProdukt(int id) {
-    }
 
     @POST
     @Path("/zamowienie")
     public Zamowienie dodajZamowienie() {
         return sklep.stworz();
+    }
+
+    @PUT
+    @Path("/zamowienie/{uuid}/{prodID}/{ilosc}")
+    public Zamowienie dodajDoZamowienia(@PathParam("uuid") UUID uuid, @PathParam("prodID") int prodId,@PathParam("ilosc") int ilosc ) {
+        return sklep.dodajProdukt(uuid, prodId, ilosc);
+    }
+
+    @GET
+    @Path("/zamowienie/{uuid}")
+    public Zamowienie pokazZamowienie(@PathParam("uuid") UUID uuid) {
+        return sklep.pokazZamowienie(uuid);
+    }
+
+    @GET
+    @Path("/zamowienie/pokaz")
+    public Collection<UUID> pokazZamowienia(){
+        return sklep.pokazZamowienia();
     }
 
 

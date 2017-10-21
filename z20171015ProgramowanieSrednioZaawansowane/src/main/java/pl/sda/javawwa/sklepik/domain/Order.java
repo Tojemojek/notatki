@@ -1,27 +1,30 @@
 package pl.sda.javawwa.sklepik.domain;
 
+import pl.sda.javawwa.sklepik.exception.OrderStateException;
+import pl.sda.javawwa.sklepik.state.OrderState;
 import pl.sda.javawwa.sklepik.strategy.RebateStrategy;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
 
     private int orderID;
-    private OrderType type;
+    //enum
+    private State state;
     private List<OrderItem> items;
     private Client client;
     private RebateStrategy rebateStrategy;
+    //interface dla state pattern
+    private OrderState orderState;
 
-
-    public enum OrderType {
-        DRAFT, PAID, CONFIRMED
+    public enum State {
+        DRAFT, PAID, CONFIRMED, DELIVERED
     }
 
-    public Order(int orderID, Client client, OrderType type) {
+    public Order(int orderID, Client client, State type) {
         this.orderID = orderID;
-        this.type = type;
+        this.state = type;
         this.client = client;
     }
 
@@ -53,7 +56,7 @@ public class Order {
     }
 
     public Money getCurrentCost() {
-        Money tmpCurrentCost = new Money(BigDecimal.ZERO);
+        Money tmpCurrentCost = new Money("0.00");
 
         for (OrderItem item : items) {
             tmpCurrentCost = tmpCurrentCost.add(item.getCost());
@@ -68,5 +71,35 @@ public class Order {
         Money totalCost = currentCost.subtract(rebate);
         return  totalCost;
     }
+
+    public void confirm() throws OrderStateException{
+        orderState.confirm(this);
+    }
+
+    public void pay() throws OrderStateException{
+        orderState.pay(this);
+    }
+
+    public void ship() throws OrderStateException{
+        orderState.ship(this);
+    }
+
+
+    public OrderState getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderState(OrderState orderState) {
+        this.orderState = orderState;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public State getState() {
+        return state;
+    }
+
 
 }

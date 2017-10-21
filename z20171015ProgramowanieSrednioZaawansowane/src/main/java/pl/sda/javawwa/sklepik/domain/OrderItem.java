@@ -1,6 +1,6 @@
 package pl.sda.javawwa.sklepik.domain;
 
-class OrderItem {
+public class OrderItem {
 
     private Product product;
     private int quantity;

@@ -18,9 +18,9 @@ public class OrderApplication {
         System.out.println("\nSprawdzenie czy działa stworzenie klienta i zamówienia");
         System.out.println("Order ID: " + order.getOrderID() + " dla Klienta: "+ order.getClient());
 
-        Product product1 = new Product("Winiacz", new Money(BigDecimal.valueOf(3.20)), Product.ProductType.DRINK);
-        Product product2 = new Product("iPhone", new Money(BigDecimal.valueOf(7999.96)), Product.ProductType.ELECTRONICS);
-        Product product3 = new Product("Chipsy", new Money(BigDecimal.valueOf(9.32)), Product.ProductType.FOOD);
+        Product product1 = new Product("Winiacz", new Money("3.20"), Product.ProductType.DRINK);
+        Product product2 = new Product("iPhone", new Money("7999.96"), Product.ProductType.ELECTRONICS);
+        Product product3 = new Product("Chipsy", new Money("9.32"), Product.ProductType.FOOD);
 
         order.addProduct(product1,2);
         order.addProduct(product2,1);
@@ -29,7 +29,6 @@ public class OrderApplication {
         System.out.println("\nSprawdzenie czy działa obliczanie kwoty za koszyk");
         Money currentCost = order.getCurrentCost();
         System.out.println("Order ID: " + order.getOrderID() + " dla Klienta: "+ order.getClient() + " ma wartość " + currentCost.getValue());
-
 
         Money totalCost = order.getTotalCost();
         System.out.println("\nSprawdzenie czy działa obliczanie rabatu za koszyk - czy total cost jest pomniejszony");

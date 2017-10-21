@@ -23,36 +23,12 @@ public class Product {
         FOOD,DRINK,ELECTRONICS;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Money getPrice() {
         return price;
     }
 
-    public void setPrice(Money price) {
-        this.price = price;
-    }
-
-    public ProductState getProductState() {
-        return productState;
-    }
-
-    public void setProductState(ProductState productState) {
-        this.productState = productState;
+    public ProductType getProductType() {
+        return productType;
     }
 
     @Override

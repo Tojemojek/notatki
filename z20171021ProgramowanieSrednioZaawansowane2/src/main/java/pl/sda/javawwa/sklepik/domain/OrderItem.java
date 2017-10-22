@@ -23,4 +23,7 @@ public class OrderItem {
         return moneyTmp;
     }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }

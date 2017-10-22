@@ -9,6 +9,7 @@ import pl.sda.javawwa.sklepik.builder.ProductBuilder;
 import pl.sda.javawwa.sklepik.exception.OrderStateException;
 import pl.sda.javawwa.sklepik.factory.OrderFactory;
 import pl.sda.javawwa.sklepik.strategy.FoodRebateStrategy;
+import pl.sda.javawwa.sklepik.strategy.PercentageRebateStrategy;
 import pl.sda.javawwa.sklepik.strategy.RebateStrategy;
 import pl.sda.javawwa.sklepik.strategy.VipRebateStrategy;
 
@@ -20,6 +21,10 @@ public class OrderTest {
 
     //wszystkie system.out.println są całkowicie zbędne
     //to jest tylko dla mnie w celu edukacyjnym
+
+    private Order createOrderForRegularClientWithBuilders() {
+        return createOrderForRegularClientWithBuilders(new PercentageRebateStrategy());
+    }
 
     private Order createOrderForRegularClientWithBuilders(RebateStrategy rebateStrategy) {
 
@@ -54,6 +59,20 @@ public class OrderTest {
         order.addProduct(product2, 2);
         order.addProduct(product3, 3);
 
+
+        return order;
+    }
+
+    private Order createOrderForRegularClientWithBuildersWithDuplicate() {
+        Order order = createOrderForRegularClientWithBuilders(new PercentageRebateStrategy());
+
+        Product product1 = new ProductBuilder()
+                .name("Winiacz")
+                .price(new Money("3.20"))
+                .productType(Product.ProductType.DRINK)
+                .build();
+
+        order.addProduct(product1, 3);
 
         return order;
     }
@@ -295,6 +314,14 @@ public class OrderTest {
         Assert.assertTrue(order.getState().equals(Order.State.DELIVERED));
     }
 
+    @Test
+    public void shouldAddQuantityIfProductExist() throws OrderStateException {
+
+        Order order = createOrderForRegularClientWithBuildersWithDuplicate();
+
+        Assert.assertTrue("Number of items should be equal ", order.getItems().size()==3);
+
+    }
 
 
 }

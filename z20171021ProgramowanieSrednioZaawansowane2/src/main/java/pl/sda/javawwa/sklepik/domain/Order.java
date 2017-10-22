@@ -5,6 +5,7 @@ import pl.sda.javawwa.sklepik.strategy.RebateStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Order {
 
@@ -29,16 +30,66 @@ public class Order {
         this.rebateStrategy = rebateStrategy;
     }
 
+    //to jest starsza wersja
+    public void addProductWithNull(Product product, int quantity) {
+        if (items == null) {
+            items = new ArrayList<>();
+        }
+
+        OrderItem orderItem = getOrderItemByProduct(product);
+
+        if (orderItem == null) {
+            orderItem = new OrderItem(product, quantity);
+            items.add(orderItem);
+        } else {
+            orderItem.setQuantity(orderItem.getQuantity() + quantity);
+        }
+    }
+
+
     public void addProduct(Product product, int quantity) {
 
         if (items == null) {
             items = new ArrayList<>();
         }
-        //ToDo powinno się sprawdzać czy produkt taki nie jest już włożony do koszyka.
-        OrderItem orderItem = new OrderItem(product, quantity);
 
-        items.add(orderItem);
+        Optional<OrderItem> orderItemOptional = getOrderItemByProductStream(product);
+        OrderItem orderItem = null;
+
+        if (!orderItemOptional.isPresent()) {
+            orderItem = new OrderItem(product, quantity);
+            items.add(orderItem);
+        } else {
+            orderItem = orderItemOptional.get();
+            orderItem.setQuantity(orderItem.getQuantity() + quantity);
+        }
+
     }
+
+    private OrderItem getOrderItemByProduct(Product product) {
+        if (items != null) {
+            for (OrderItem orderItem : items) {
+
+                Product productItem = orderItem.getProduct();
+
+                if (productItem.equals(product)) {
+                    return orderItem;
+                }
+            }
+        }
+        return null;
+    }
+
+    private Optional<OrderItem> getOrderItemByProductStream(Product product) {
+        if (items != null) {
+            Optional<OrderItem> ordemItemOptional = items.stream()
+                    .filter(i -> i.getProduct().equals(product))
+                    .findFirst();
+            return ordemItemOptional;
+        }
+        return Optional.empty();
+    }
+
 
     public List<OrderItem> getItems() {
         return items;
@@ -77,7 +128,6 @@ public class Order {
         } else if (this.state.equals(State.CONFIRMED)) {
             throw new OrderStateException("Confirmed order can't be confirmed again");
         }
-
     }
 
     public void pay() throws OrderStateException {

@@ -12,7 +12,7 @@ select street from address where city = 'Warszawa';
 
 -- tym usuwaliśmy kolumnę z tabeli
 -- order jest w ` bo order to też słowo kluczowe
-alter table `order` drop column total_price;
+-- alter table `order` drop column total_price;
 
 select min(price) from product;
 
@@ -32,7 +32,8 @@ select * from `order` where date < '2017-09-28';
 
 select min(date) from `order`; 
 
-update user set surname  = 'Keller' where name = 'Zbigniew';
+-- to zmienia nazwiska 
+-- update user set surname = 'Keller' where name = 'Zbigniew';
 
 -- uwaga na dokładność obliczeń
 update product set price = price * 1.10;
@@ -43,3 +44,5 @@ CHANGE COLUMN `price` `price` DECIMAL UNSIGNED NOT NULL ;
 
 ALTER TABLE `mojeallegro`.`product` 
 CHANGE COLUMN `price` `price` DECIMAL(10,2) UNSIGNED NOT NULL ;
+
+select name from category;

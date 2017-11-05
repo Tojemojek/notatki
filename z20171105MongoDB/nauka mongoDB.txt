@@ -1,0 +1,75 @@
+do uruchomienia z ścieżką danych
+"C:\Program Files\MongoDB\Server\3.2\bin\mongod.exe" --dbpath d:\data\db
+
+-- Pokaż bazy danych
+show dbs
+
+-- użyj / stwórz bazę danych
+use clients
+
+-- dodaj dane 
+db.client.insert({id:1})
+
+-- pokaż tabelki
+show collections
+
+-- wyszukaj 
+db.client.find({id:1})
+
+-- dodaj dane 
+db.client.insert({id:2})
+db.client.insert({id:2,name:"Jan", surname:"Kowalski", age:44, car:"Golf"})
+db.client.insert({id:3,name:"Anna", surname:"Nowak", age:24, car:"Mini"})
+db.client.insert({id:4,name:"Jan", surname:"Ostrowski", age:44, car:"{Passerati"})
+db.client.insert({id:5,name:"Tomasz", surname:"Nieznany", age:44, car:"Maluch"})
+
+--wyświetl wszystko
+db.client.find()
+
+--wyświetl wszystko "ładnie"
+db.client.find().pretty()
+
+--usunięcie rekodu z id "określonym"
+db.client.remove({"_id":ObjectId("59fed50394a4d683090eaf3e")})
+
+-- dodaj dane ale więcej niż jeden naraz 
+db.client.insert(
+[
+{id:6,name:"Jan", surname:"Kowalski", age:44, car:"Golf"},
+{id:7,name:"Anna", surname:"Nowak", age:24, car:"Mini"}
+])
+
+-- wyszukaj dane kiedy name = Jan
+db.client.find({name:"Jan"}).pretty()
+
+-- operatory 
+-- = :
+-- < $lt
+-- <= $lte
+
+-- wyszukaj dane kiedy wiek < 30
+db.client.find({age:{$lt:30}}).pretty()
+
+-- jest różnica przy wielkości liter
+db.client.find({car:{$ne:"Golf"}}).pretty()
+db.client.find({car:{$ne:"golf"}}).pretty()
+
+-- dwa warunki - and
+db.client.find({car:{$ne:"golf"},"name":"Anna"}).pretty()
+
+--dwa warunki - or
+db.client.find({$or:[{car:{$ne:"golf"}},{"name":"Anna"}]}).pretty()
+
+-- zapytania do bazy studentów
+
+-- wszystko zaczyna się na A
+db.student.find({name:/^A/}).pretty()
+
+-- wszystko co zawiera w sobie w tablicy scores exam
+db.student.find({"scores":{$elemMatch:{type:"exam"}}}).pretty()
+
+-- wszystko co zawiera w sobie w tablicy scores exam z wynikiem poniżej 10
+db.student.find({"scores":{$elemMatch:{type:"exam",score:{$lt:10}}}}).pretty()
+
+-- wszystkie imiona kończące się na h
+db.student.find({name:{$regex: "h$"}}).pretty()

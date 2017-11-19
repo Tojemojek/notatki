@@ -8,6 +8,8 @@ public interface ClientDao {
 
     public void insert(Client client);
 
+    public void insertWithId(Client client);
+
     public void update(Client client);
 
     public void delete(Integer clientID);

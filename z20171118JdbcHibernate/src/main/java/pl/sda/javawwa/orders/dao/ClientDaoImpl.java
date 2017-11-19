@@ -17,15 +17,15 @@ public class ClientDaoImpl implements ClientDao {
     public Client findById(Integer id) {
 
         Client client = null;
-
+        ResultSet resultSet = null;
         logger.info("Trying to get connection...");
 
         try (Connection connection = DriverManager.getConnection(MY_SQL_CONNECTION_STRING);
              PreparedStatement statement = connection.prepareStatement(
-                     "SELECT id, first_name, second_name, email, type FROM client WHERE id=?");
-             ResultSet resultSet = statement.executeQuery()) {
+                     "SELECT id, first_name, second_name, email, type FROM client WHERE id=?")) {
 
             statement.setInt(1, id);
+            resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
                 Integer clientId = resultSet.getInt("id");
@@ -39,15 +39,16 @@ public class ClientDaoImpl implements ClientDao {
                 logger.info(client);
             }
 
-
         } catch (SQLException se) {
             logger.error("Problem with getting client", se);
         } finally {
-//              tu zasadniczo trzeba by było pozamykać, ja skorzystałem z try with resources
-//            connection.close();
-//            statement = null;
-//            resultSet = null;
-
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    logger.error("ResultSet was not closed correctly", e);
+                }
+            }
         }
 
         return client;
@@ -69,12 +70,32 @@ public class ClientDaoImpl implements ClientDao {
 
             statement.execute();
 
-
-
-
         } catch (SQLException se) {
             logger.error("Problem with insert client", se);
             throw new DatabaseException("Problem with insert client", se);
+        }
+    }
+
+    @Override
+    public void insertWithId(Client client) {
+
+        logger.info("Trying to get connection...");
+
+        try (Connection connection = DriverManager.getConnection(MY_SQL_CONNECTION_STRING);
+             PreparedStatement statement = connection.prepareStatement(
+                     "INSERT INTO client (id, first_name, second_name, email, type) " + "VALUES(?,?,?,?,?)")) {
+
+            statement.setInt(1, client.getId());
+            statement.setString(2, client.getFirstName());
+            statement.setString(3, client.getSecondName());
+            statement.setString(4, client.getEmail());
+            statement.setString(5, client.getType().name());
+
+            statement.execute();
+
+        } catch (SQLException se) {
+            logger.error("Problem with insert client with ID", se);
+            throw new DatabaseException("Problem with insert client with ID", se);
         }
     }
 
@@ -85,7 +106,7 @@ public class ClientDaoImpl implements ClientDao {
 
         try (Connection connection = DriverManager.getConnection(MY_SQL_CONNECTION_STRING);
              PreparedStatement statement = connection.prepareStatement(
-                     "UPDATE client SET first_name=?, second_name=?, email=?,type=?"+
+                     "UPDATE client SET first_name=?, second_name=?, email=?,type=?" +
                              " WHERE id=?")) {
 
             int parameterIndex = 1;
@@ -122,7 +143,5 @@ public class ClientDaoImpl implements ClientDao {
             throw new DatabaseException("Problem with client deletion", se);
         }
     }
-
-
 
 }

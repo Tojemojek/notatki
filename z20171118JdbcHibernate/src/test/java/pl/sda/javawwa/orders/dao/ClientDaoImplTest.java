@@ -5,8 +5,6 @@ import org.junit.Test;
 import pl.sda.javawwa.orders.entieties.Client;
 import pl.sda.javawwa.orders.entieties.ClientType;
 
-import static org.junit.Assert.*;
-
 // generalnie testów nie robi się na żywej bazie SQL
 // HSQLD - tworzy się taką bazę
 // H2 - lub taką
@@ -14,27 +12,31 @@ import static org.junit.Assert.*;
 // przy testach bo takie testy jak tu nie przechodzą za wiele razy
 // więc takie metody mogą spowodować fałszywe alarmy
 
-
-
 public class ClientDaoImplTest {
 
     @Test
     public void findById() throws Exception {
 
         ClientDao clientDao = new ClientDaoImpl();
+        Client expectedClient = new Client(1, "Jan", "Kowalski", "jk@mailinator.com", ClientType.VIP);
+
+        clientDao.insertWithId(expectedClient);
+
         Client clientFromDatabase = clientDao.findById(1);
-        Client expectedClient = new Client(1,"Jan","Kowalski","jk@mailinator.com", ClientType.VIP);
-        Assert.assertEquals("Clients should be the same", expectedClient,clientFromDatabase);
+
+        Assert.assertEquals("Clients should be the same", expectedClient, clientFromDatabase);
+
+        clientDao.delete(1);
+
 
     }
-
 
     @Test
     public void shouldInsertClient() throws Exception {
 
         ClientDao clientDao = new ClientDaoImpl();
         //bez id bo ID musi być przypisany przez bazę danych
-        Client insertedClient = new Client(null,"Johny","Bravo","jb@mailinator.com", ClientType.REGULAR);
+        Client insertedClient = new Client(null, "Johny", "Bravo", "jb@mailinator.com", ClientType.REGULAR);
         clientDao.insert(insertedClient);
     }
 
@@ -42,10 +44,9 @@ public class ClientDaoImplTest {
     public void shouldUpdateClient() throws Exception {
 
         ClientDao clientDao = new ClientDaoImpl();
-        Client updatedClient = new Client(2,"Johny2","Bravo2","jb2@mailinator.com", ClientType.REGULAR);
+        Client updatedClient = new Client(2, "Johny2", "Bravo2", "jb2@mailinator.com", ClientType.REGULAR);
         clientDao.update(updatedClient);
     }
-
 
     @Test
     public void shouldDeleteClient() throws Exception {
@@ -53,7 +54,6 @@ public class ClientDaoImplTest {
         ClientDao clientDao = new ClientDaoImpl();
         Integer deletedClientID = 1;
         clientDao.delete(deletedClientID);
-
     }
 
 }

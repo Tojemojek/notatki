@@ -11,7 +11,7 @@ public class OrderItem {
         this.orderId = orderId;
         this.product = product;
         this.quantity = quantity;
-        this.productId = product.getId();
+        this.productId = (product != null) ?  product.getId() : null;
     }
 
     public OrderItem(Integer orderId, Integer productId, Integer quantity) {

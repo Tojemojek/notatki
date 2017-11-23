@@ -24,6 +24,16 @@ public class Order {
         this.totalCost = totalCost;
     }
 
+    public Order(Integer id, Integer clientId, Date insertDate, Date updateDate, OrderStatus status, BigDecimal totalCost,List<OrderItem> items) {
+        this.id = id;
+        this.clientId = clientId;
+        this.insertDate = insertDate;
+        this.updateDate = updateDate;
+        this.status = status;
+        this.totalCost = totalCost;
+        this.items = items;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -58,4 +68,17 @@ public class Order {
         items.add(orderItem);
     }
 
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", clientId=" + clientId +
+                ", insertDate=" + insertDate +
+                ", updateDate=" + updateDate +
+                ", status=" + status +
+                ", totalCost=" + totalCost +
+                ", items=" + items +
+                '}';
+    }
 }

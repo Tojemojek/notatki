@@ -25,6 +25,12 @@ public class Client {
     @Enumerated(EnumType.STRING)
     private ClientType type;
 
+    @OneToOne
+//    @OneToOne(fetch = FetchType.EAGER)
+//    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    private Address address;
+
     public Client() {
     }
 
@@ -33,6 +39,19 @@ public class Client {
         this.secondName = secondName;
         this.email = email;
         this.type = type;
+    }
+
+    public Client(Integer id, String firstName, String secondName, String email, ClientType type) {
+        this.id = id;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.email = email;
+        this.type = type;
+    }
+
+
+    public Address getAddress() {
+        return address;
     }
 
     public Integer getId() {
@@ -63,6 +82,7 @@ public class Client {
                 ", secondName='" + secondName + '\'' +
                 ", email='" + email + '\'' +
                 ", type=" + type +
+                ", address=" + address +
                 '}';
     }
 }

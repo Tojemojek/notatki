@@ -6,5 +6,13 @@ public interface ClientDao {
 
     public Client findById(Integer id);
 
+    public void save(Client client);
+
+    public void delete(Integer clientId);
+
+    public void update(Client client);
+
+
+
 
 }

@@ -13,20 +13,66 @@ public class ClientDaoImpl implements ClientDao {
 
     @Override
     public Client findById(Integer id) {
-
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         Client client = null;
+
         try {
-            client = session.load(Client.class, id);
+            client = session.find(Client.class, id);
             transaction.commit();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             transaction.rollback();
             logger.error("Problem during client load with id=" + id, e);
         }
 
         return client;
     }
+
+    @Override
+    public void save(Client client) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            session.save(client);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            logger.error("Problem during client save with id=" + client.getId(), e);
+        }
+    }
+
+    @Override
+    public void delete(Integer clientId) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            Client client = session.find(Client.class, clientId);
+            session.remove(client);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            logger.error("Problem during client remove=" + clientId, e);
+        }
+    }
+
+    @Override
+    public void update(Client client) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            session.saveOrUpdate(client);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            logger.error("Problem during client update=" + client.getId(), e);
+        }
+    }
+
 }

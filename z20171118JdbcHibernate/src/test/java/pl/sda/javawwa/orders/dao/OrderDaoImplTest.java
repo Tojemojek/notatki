@@ -26,8 +26,8 @@ public class OrderDaoImplTest {
 
     @Test
     public void shouldFindOrderById() throws Exception{
-        OrderDao orderDao = new OrderDaoImpl();
 
+        OrderDao orderDao = new OrderDaoImpl();
         Order order = orderDao.findById(4);
 
     }

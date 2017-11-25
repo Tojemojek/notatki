@@ -55,13 +55,14 @@ public class OrderDaoImpl implements OrderDao {
             }
 
             connection.commit();
-            logger.info("Commit either was executed");
+            logger.info("Commit was executed");
 
         } catch (SQLException se) {
             logger.error("Problem during order insert", se);
             throw new DatabaseException("Problem during order insert", se);
         } finally {
-            //mam connection i statement w bloku try with resources - nie ma nic do zamykania
+            //mam connection w bloku try with resources - nie ma nic do zamykania
+            // statement należałoby tu zamknąć
         }
 
     }

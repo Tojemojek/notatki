@@ -39,6 +39,6 @@ public class AlbumDto {
                 "userId=" + userId +
                 ", id=" + id +
                 ", title='" + title + '\'' +
-                '}';
+                '}' + "\n";
     }
 }

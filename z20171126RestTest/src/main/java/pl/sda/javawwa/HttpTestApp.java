@@ -50,7 +50,7 @@ public class HttpTestApp {
 
         HttpEntity httpEntity = response.getEntity();
 
-        //          To jest pobranie strumienia danych wersja prymitywniejsza
+        //        To jest pobranie strumienia danych wersja prymitywniejsza
         //        BufferedReader br = new BufferedReader(new InputStreamReader(httpEntity.getContent()));
 
         logger.info(response.getStatusLine().toString());

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zamówienie pizzy przez net</title>
+</head>
+
+<body>
+
+<h1>Tu składasz zamówienie </h1>
+
+<img src="zdjecie.jpg" height="100" alt="tu jest super pizza z pizzerii nowoursynowskiej">
+
+<form method="POST" action="http://kostrowski.pl/api/order">
+    <h3>Wybierz rodzaj</h3>
+    <select name="type">
+        <option value="veg">Wegetariańska</option>
+        <option value="salami">Salami</option>
+        <option value="hawajska">Ta z ananasem</option>
+        <option value="cap">Z chili i kurczakiem</option>
+    </select>
+
+    <h3>Wybierz rozmiar</h3>
+    <input type="radio" id="sizeS" name="size"><label for="sizeS">Rozmiar S</label>
+    <input type="radio" id="sizeM" name="size"><label for="sizeS">Rozmiar M</label>
+    <input type="radio" id="sizeL" name="size"><label for="sizeS">Rozmiar L</label>
+    <input type="radio" id="sizeXL" name="size"><label for="sizeS">Rozmiar XL</label>
+
+
+
+    <h3>A może bogatsze wnętrzne?</h3>
+    <input type="checkbox" name="cheese" value="true"/>Extra ser<br>
+    <input type="checkbox" name="bakon" value="true"/>Extra bekon<br>
+
+    <h3>Specjalne życzenia lub informacje dla dostawcy</h3>
+    <textarea name="extraInfo" placeholder="Tu wpisz swoje uwagi"></textarea>
+
+    <h3>Adres dostawy</h3>
+
+    <table>
+        <tr>
+            <td colspan="2"><input type="text" name="nameAndSurname" placeholder="Imię i Nazwisko"></td>
+        </tr>
+        <tr>
+            <td>Kod pocztowy <br><input type="text" name="zipCode" placeholder="Kod Pocztowy"></td>
+            <td>Miejscowość<br><input type="text" name="cityName"></td>
+        </tr>
+        <tr>
+            <td colspan="2">Ulica z numerem mieszkania <br><input type="text" name="streetWithNumber"></td>
+        </tr>
+    </table>
+
+
+    <h3>Wszystko ok? To zamów!</h3>
+    <input type="submit" value="Naciskasz - a za 30 min pyszna pizza jest u Ciebie">
+
+
+</form>
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+/*to znajdzie wszytkie span wewnątrz div.test nawet jeśli to nie jest bezpośrednio dziecko*/
+div.test span{
+    color:red;
+
+}

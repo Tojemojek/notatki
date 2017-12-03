@@ -1,0 +1,5 @@
+/*wyszuka wszystkie span + wszystkie div z klasą a*/
+span, div.a{
+    color:red;
+
+}

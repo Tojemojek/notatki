@@ -3,37 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Kalkulator</title>
+    <link rel="stylesheet" href="kalkulator.css" type="text/css"/>
+
 </head>
 <body>
 
 <h1>Bardzo prosty kalkulator</h1>
 
-<table border="1">
+<table>
     <tr>
-        <td colspan=4><input type="text" name="equation"></td>
+        <td colspan=4><input class="inputField" type="text" name="equation"></td>
+    </tr>
+    <tr>
+        <td><button class="functional" type="button">C</button></td>
+        <td><button class="functional" type="button">÷</button></td>
+        <td><button class="functional" type="button">x</button></td>
+        <td><button class="functional" type="button"><-</button></td>
     </tr>
     <tr>
         <td><button type="button">7</button></td>
         <td><button type="button">8</button></td>
         <td><button type="button">9</button></td>
-        <td><button type="button">X</button></td>
+        <td><button class="functional" type="button">-</button></td>
     </tr>
     <tr>
         <td><button type="button">4</button></td>
         <td><button type="button">5</button></td>
         <td><button type="button">6</button></td>
-        <td><button type="button">-</button></td>
+        <td><button class="functional" type="button">+</button></td>
     </tr>
     <tr>
         <td><button type="button">1</button></td>
         <td><button type="button">2</button></td>
         <td><button type="button">3</button></td>
-        <td><button type="button">+</button></td>
+        <td rowspan=2><button class="equals" type="button">=</button></td>
     </tr>
     <tr>
         <td colspan= 2><button type="button">0</button></td>
-        <td><button type="button">,</button></td>
-        <td><button type="button">=</button></td>
+        <td><button class="functional" type="button">,</button></td>
+
     </tr>
 
 </table>

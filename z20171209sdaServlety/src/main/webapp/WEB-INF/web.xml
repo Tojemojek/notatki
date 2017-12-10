@@ -7,15 +7,22 @@
 
     <servlet>
         <servlet-name>SimpleCalendarServlet</servlet-name>
-        <servlet-class>pl.sda.javawwa.SimpleCalendarServlet</servlet-class>
+        <servlet-class>pl.sda.javawwa.servlets.SimpleCalendarServlet</servlet-class>
     </servlet>
+
     <servlet>
         <servlet-name>AllHeadersStrikesBack</servlet-name>
-        <servlet-class>pl.sda.javawwa.AllHeadersStrikesBack</servlet-class>
+        <servlet-class>pl.sda.javawwa.servlets.AllHeadersStrikesBack</servlet-class>
     </servlet>
+
     <servlet>
         <servlet-name>SessionServlet</servlet-name>
-        <servlet-class>pl.sda.javawwa.SessionServlet</servlet-class>
+        <servlet-class>pl.sda.javawwa.servlets.SessionServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>Days</servlet-name>
+        <servlet-class>pl.sda.javawwa.servlets.DaysListServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -27,11 +34,15 @@
         <servlet-name>AllHeadersStrikesBack</servlet-name>
         <url-pattern>/header</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>SessionServlet</servlet-name>
         <url-pattern>/session</url-pattern>
     </servlet-mapping>
 
-
+    <servlet-mapping>
+        <servlet-name>Days</servlet-name>
+        <url-pattern>/days</url-pattern>
+    </servlet-mapping>
 
 </web-app>

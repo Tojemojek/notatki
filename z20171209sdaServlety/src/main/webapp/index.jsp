@@ -15,7 +15,6 @@
 
 Date after <%=days%> days: <%=dt.toString()%>
 
-
 <br>
 <br>
 
@@ -29,7 +28,6 @@ Date after <%=i%> days: <%=after.toString()%>
 <%
     }
 %>
-
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-package pl.sda.javawwa;
+package pl.sda.javawwa.servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.*;

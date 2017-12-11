@@ -5,6 +5,16 @@
 <web-app>
     <display-name>Archetype Created Web Application</display-name>
 
+    <filter>
+        <filter-name>LoggedUserFilter</filter-name>
+        <filter-class>pl.sda.javawwa.filter.LoggedUserFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>LoggedUserFilter</filter-name>
+        <url-pattern>/zabezpieczone/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>SimpleCalendarServlet</servlet-name>
         <servlet-class>pl.sda.javawwa.servlets.SimpleCalendarServlet</servlet-class>
@@ -27,22 +37,22 @@
 
     <servlet-mapping>
         <servlet-name>SimpleCalendarServlet</servlet-name>
-        <url-pattern>/calendar</url-pattern>
+        <url-pattern>/zabezpieczone/calendar</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>AllHeadersStrikesBack</servlet-name>
-        <url-pattern>/header</url-pattern>
+        <url-pattern>/zabezpieczone/header</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>SessionServlet</servlet-name>
-        <url-pattern>/session</url-pattern>
+        <url-pattern>/zabezpieczone/session</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>Days</servlet-name>
-        <url-pattern>/days</url-pattern>
+        <url-pattern>/zabezpieczone/days</url-pattern>
     </servlet-mapping>
 
 </web-app>

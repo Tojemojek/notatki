@@ -1,5 +1,7 @@
 package pl.sda.javawwa.servlets;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.sda.javawwa.dto.DaysDto;
 
 import javax.servlet.ServletException;
@@ -11,12 +13,35 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+
 public class DaysListServlet extends HttpServlet {
+
+    private static final Logger LOG = LoggerFactory.getLogger(DaysListServlet.class);
+// todo przerobić tak aby tu było sprawdzenie poprawności get parameter days - żeby nie trafić na liczbę
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getParameter("days") == null) {
+            req.getRequestDispatcher("views/days.jsp").forward(req, resp);
+        } else {
+            calculatedDaysIfInputNotNull(req, resp);
+        }
+    }
 
-        Integer days = Integer.valueOf(req.getParameter("days"));
+
+    private void calculatedDaysIfInputNotNull(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Integer days = null;
+
+        try {
+            days = Integer.valueOf(req.getParameter("days"));
+        } catch (NumberFormatException e) {
+            LOG.error("Tu zamiast liczby jest inna wartość '{}'", req.getParameter("days"), e);
+            return;
+        } catch (NullPointerException e) {
+            LOG.error("Wyleciał błąd typu null pointer", e);
+        }
+
+
         LocalDateTime dt = LocalDateTime.now();
 
         List<DaysDto> daysDtoList = new LinkedList<>();
@@ -35,10 +60,9 @@ public class DaysListServlet extends HttpServlet {
         //ustawienie atrubutu sesji po to żeby było to przekazane obiektowo wewnątrz
         //servletów
         req.setAttribute("mojAtrybutListyDTO", daysDtoList);
-        req.setAttribute("howManyDaysWereGiven",days);
+        req.setAttribute("howManyDaysWereGiven", days);
 
         //to jest do przekazania sterowania do kolejnego servletu - w tym przypadku jsp.
         req.getRequestDispatcher("views/days.jsp").forward(req, resp);
-
     }
 }

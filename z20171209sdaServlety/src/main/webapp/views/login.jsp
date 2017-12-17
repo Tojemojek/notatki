@@ -5,10 +5,19 @@
 
 <body>
 <h2>Formatka Logowania</h2>
-<p>Nie jesteś jeszcze zalogowany</p>
+
+<p>
+    <c:choose>
+        <c:when test="${error eq 'INCORRECT_CREDENTIALS'}">
+            <span style="color: red">Niepoprawny user / hasło</span>
+        </c:when>
+        <c:otherwise>Witaj, zaloguj się!</c:otherwise>
+    </c:choose>
+</p>
+
 <br>
 
-<form id="logowanie" method="post" action="">
+<form id="logowanie" method="post">
     <table>
         <tr>
             <td>User</td>
@@ -22,6 +31,8 @@
     <input type="submit" value="Loguj!">
 </form>
 
+<%--&nbsp - spacja--%>
+<%--&lt; &gt; nawiasy do escape html tag--%>
 
 </body>
 </html>

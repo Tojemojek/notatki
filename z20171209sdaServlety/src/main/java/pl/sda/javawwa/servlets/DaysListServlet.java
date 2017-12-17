@@ -17,17 +17,15 @@ import java.util.List;
 public class DaysListServlet extends HttpServlet {
 
     private static final Logger LOG = LoggerFactory.getLogger(DaysListServlet.class);
-// todo przerobić tak aby tu było sprawdzenie poprawności get parameter days - żeby nie trafić na liczbę
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("days") == null) {
-            req.getRequestDispatcher("views/days.jsp").forward(req, resp);
+            req.getRequestDispatcher("/views/days.jsp").forward(req, resp);
         } else {
             calculatedDaysIfInputNotNull(req, resp);
         }
     }
-
 
     private void calculatedDaysIfInputNotNull(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer days = null;
@@ -40,7 +38,6 @@ public class DaysListServlet extends HttpServlet {
         } catch (NullPointerException e) {
             LOG.error("Wyleciał błąd typu null pointer", e);
         }
-
 
         LocalDateTime dt = LocalDateTime.now();
 
@@ -63,6 +60,6 @@ public class DaysListServlet extends HttpServlet {
         req.setAttribute("howManyDaysWereGiven", days);
 
         //to jest do przekazania sterowania do kolejnego servletu - w tym przypadku jsp.
-        req.getRequestDispatcher("views/days.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/days.jsp").forward(req, resp);
     }
 }

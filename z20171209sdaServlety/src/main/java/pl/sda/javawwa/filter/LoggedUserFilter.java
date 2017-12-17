@@ -10,7 +10,6 @@ public class LoggedUserFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
     }
 
     @Override
@@ -19,8 +18,11 @@ public class LoggedUserFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
+
         String user = (String) req.getSession().getAttribute("user");
         if (user == null) {
+            String url = req.getRequestURL().toString();
+            req.getSession().setAttribute("requestedUrl", url);
             resp.sendRedirect("/login");
             return;
         } else {

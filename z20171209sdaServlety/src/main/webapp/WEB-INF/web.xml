@@ -35,6 +35,11 @@
         <servlet-class>pl.sda.javawwa.servlets.DaysListServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>pl.sda.javawwa.servlets.LoginServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>SimpleCalendarServlet</servlet-name>
         <url-pattern>/zabezpieczone/calendar</url-pattern>
@@ -53,6 +58,11 @@
     <servlet-mapping>
         <servlet-name>Days</servlet-name>
         <url-pattern>/zabezpieczone/days</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
 </web-app>

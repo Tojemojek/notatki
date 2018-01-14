@@ -6,8 +6,10 @@ gitignore
 **/NaukaSamemu
 **/Spakowane
 **/Stare_i_nieistotne
-**/PraceDomowe
 **/NaukaSamemu
 **/PraceDomoweZ*
 **/Spoj
 **/SlownikPL
+**/sklepSpringMvcHibernate
+**/z20171216SpringMvc
+**/ArchiwumLPMF

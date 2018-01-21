@@ -23,7 +23,7 @@
 
 
 <c:if test="${not empty errorMessage}">
-    <div><c:out value="${errorMessage}"/> </div>
+    <div><c:out value="${errorMessage}"/></div>
 </c:if>
 <br>
 
@@ -41,7 +41,7 @@
             <td><form:errors path="name" id="name"></form:errors></td>
         </tr>
         <tr>
-            <td>Typ productu</td>
+            <td>Typ produktu</td>
             <td>
                 <form:select path="productType" id="productType" items="${productTypes}">
                 </form:select>
@@ -71,6 +71,7 @@
     </table>
 
 </form:form>
+
 
 <a href="/products-web/new"/>Dodaj nowy product</a>
 

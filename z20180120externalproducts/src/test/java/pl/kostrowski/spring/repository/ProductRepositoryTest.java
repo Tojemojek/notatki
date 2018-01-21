@@ -52,7 +52,7 @@ public class ProductRepositoryTest {
     @Test
     public void shouldFindProductByName() {
 
-        List<Product> ajfon = productRepository.findAllByName("Ajfon");
+        List<Product> ajfon = productRepository.findByName("Ajfon");
 
         Assert.assertEquals(0, ajfon.size());
     }

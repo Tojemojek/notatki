@@ -9,21 +9,44 @@
 </head>
 <body>
 
+
 <form action="/products-web/list">
-    <table>
+    <table border="1">
         <tr>
-            <td>Product name :<input name="productName" type="text" value=""></td>
-        </tr>
-        <tr>
-            <td>Product type :<input name="productType" type="text" value=""></td>
+            <th>Nazwa atrybutu</th>
+            <th>Wartość atrybutu</th>
         </tr>
 
         <tr>
-            <td>Product type :<input type="submit" value="Szukaj produktów"></td>
+            <td>Nazwa</td>
+            <td><input name="productName" type="text" value=""/></td>
         </tr>
+        <tr>
+            <td>Typ produktu</td>
+            <td>
+                <select name="productType">
+                    <option value=""
+                            <c:if test="${'' eq selectedProductType}"> selected </c:if>>Wszystko
+                    </option>
+                    <c:forEach items="${productTypes}" var="categories">
+                        <option value="${categories.key}"
+                                <c:if test="${categories.key eq selectedProductType}"> selected </c:if>>
+                                ${categories.value}
+                        </option>
+                    </c:forEach>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Wyszukaj produkty"/>
+            </td>
+        </tr>
+
     </table>
-</form>
 
+</form>
 
 <table border="1">
     <tr>

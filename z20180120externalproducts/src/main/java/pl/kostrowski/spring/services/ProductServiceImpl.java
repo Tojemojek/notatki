@@ -39,9 +39,22 @@ public class ProductServiceImpl implements ProductService {
         if (type != null){
             productType= ProductType.valueOf(type);
         }
-
         List<ProductDto> convertedProducts =
-                StreamSupport.stream(productRepository.findByNameAndType(name, productType).spliterator(), false)
+                StreamSupport.stream(productRepository.findByNameAndProductType(name, productType).spliterator(), false)
+                        .map(p -> productDtoConverter.convert(p))
+                        .collect(Collectors.toList());
+        return convertedProducts;
+    }
+
+    @Override
+    public List<ProductDto> findByType(String type) {
+
+        ProductType productType =null;
+        if (type != null){
+            productType= ProductType.valueOf(type);
+        }
+        List<ProductDto> convertedProducts =
+                StreamSupport.stream(productRepository.findByProductType(productType).spliterator(), false)
                         .map(p -> productDtoConverter.convert(p))
                         .collect(Collectors.toList());
         return convertedProducts;
@@ -49,9 +62,9 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public List<ProductDto> findAllByName(String name) {
+    public List<ProductDto> findByName(String name) {
         List<ProductDto> convertedProducts =
-                StreamSupport.stream(productRepository.findAllByName(name).spliterator(), false)
+                StreamSupport.stream(productRepository.findByName(name).spliterator(), false)
                         .map(p -> productDtoConverter.convert(p))
                         .collect(Collectors.toList());
         return convertedProducts;
@@ -65,7 +78,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void save(ProductDto productDto) throws ProductNameExists {
         Product converted = productDtoConverter.convert(productDto);
-        List<ProductDto> productsByName = this.findAllByName(productDto.getName());
+        List<ProductDto> productsByName = this.findByName(productDto.getName());
         if (!CollectionUtils.isEmpty(productsByName)) {
             throw new ProductNameExists("Product with name " + productDto.getName() + " exists");
         } else {

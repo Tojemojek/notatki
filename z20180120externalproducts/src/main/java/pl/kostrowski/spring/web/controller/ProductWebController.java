@@ -11,10 +11,7 @@ import pl.kostrowski.spring.exceptions.ProductNameExists;
 import pl.kostrowski.spring.services.ProductService;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ProductWebController {
@@ -30,7 +27,21 @@ public class ProductWebController {
                                @RequestParam(value = "productType", required = false) String productType,
                                Map<String, Object> model) {
 
-        List<ProductDto> productDto = productService.findAllByName(productName, productType);
+        List<ProductDto> productDto = new LinkedList<>();
+
+        if (productName != null && !productName.equals("") && productType != null && !productType.equals("")) {
+            productDto = productService.findByNameAndType(productName, productType);
+            model.put("selectedProductType", productType);
+        } else if (productName != null && !productName.equals("")) {
+            productDto = productService.findByName(productName);
+        } else if (productType != null && !productType.equals("")) {
+            productDto = productService.findByType(productType);
+            model.put("selectedProductType", productType);
+        } else {
+            productDto = productService.findAll();
+        }
+
+        model.put("productTypes", getAllProductTypesAsMap());
         model.put("productList", productDto);
 
         return "products";

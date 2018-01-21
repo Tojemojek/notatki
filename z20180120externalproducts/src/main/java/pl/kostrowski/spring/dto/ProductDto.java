@@ -1,16 +1,21 @@
 package pl.kostrowski.spring.dto;
 
-import pl.kostrowski.spring.entity.ProductType;
-
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class ProductDto {
 
     private Integer id;
+
+    @NotNull
+    @Size(min = 3, max = 10)
     private String name;
+
     private String productType;
+
+    @NotNull
+    @Min(0)
     private Integer quantity;
 
     public ProductDto() {

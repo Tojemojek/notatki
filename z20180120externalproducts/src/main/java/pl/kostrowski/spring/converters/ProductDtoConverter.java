@@ -5,4 +5,5 @@ import pl.kostrowski.spring.entity.Product;
 
 public interface ProductDtoConverter {
     public ProductDto convert(Product product);
+    public Product convert(ProductDto product);
 }

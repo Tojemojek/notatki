@@ -25,5 +25,4 @@ public class ProductController {
     public ProductDto findAll(@PathVariable(value = "id") Integer id){
         return productService.findById(id);
     }
-
 }

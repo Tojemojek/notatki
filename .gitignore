@@ -3,6 +3,8 @@ gitignore
 **/.idea
 **/target
 *.iml
+*mvnw*
+**/.mvn
 **/NaukaSamemu
 **/Spakowane
 **/Stare_i_nieistotne

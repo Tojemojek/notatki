@@ -50,6 +50,7 @@
         <tr>
             <td>Ilość w bazie</td>
             <td><form:input path="quantity" id="quantity"></form:input></td>
+            <c:if test=""
             <td><form:errors path="quantity" id="quantity"></form:errors></td>
         </tr>
         <tr>

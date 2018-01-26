@@ -7,22 +7,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Wyedytuj sobie autko</title>
-    <style>
-
-        th {
-            background-color: orange;
-        }
-
-        td {
-            background-color: lightblue;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
 
 <jsp:include page="menu.jsp"/>
-
-<a href="/cars/new"/>Dodaj nowy samochód</a>
 
 <br><br>
 
@@ -35,23 +24,30 @@
         <tr>
             <td>Marka</td>
             <td><form:input path="brand" id="brand"></form:input></td>
-            <td><form:errors path="brand" id="brand"></form:errors></td>
+            <c:if test="${thereAreErrors}">
+                <td><form:errors path="brand" id="brand"></form:errors></td>
+            </c:if>
         </tr>
         <tr>
             <td>Model</td>
             <td><form:input path="model" id="model"></form:input></td>
-            <td><form:errors path="model" id="model"></form:errors></td>
+            <c:if test="${thereAreErrors}">
+                <td><form:errors path="model" id="model"></form:errors></td>
+            </c:if>
         </tr>
         <tr>
             <td>Data produkcji</td>
-            <td><input type="text" name="productionDate" value="<c:out value="${editedCar.productionDate}"/>"/></td>
-                <%--<td><form:input path="productionDate" id="productionDate"></form:input></td>--%>
-            <td><form:errors path="productionDate" id="productionDate"></form:errors></td>
+            <td><form:input path="productionDate" id="productionDate"></form:input></td>
+            <c:if test="${thereAreErrors}">
+                <td><form:errors path="productionDate" id="productionDate"></form:errors></td
+            </c:if>
         </tr>
         <tr>
             <td>Vin</td>
             <td><form:input path="vin" id="vin"></form:input></td>
-            <td><form:errors path="vin" id="vin"></form:errors></td>
+            <c:if test="${thereAreErrors}">
+                <td><form:errors path="vin" id="vin"></form:errors></td>
+            </c:if>
         </tr>
         <tr>
             <td>Chcesz zapisać?</td>

@@ -7,7 +7,7 @@
     <tr>
         <td><a href="/cars/list">Lista aut</a></td>
         <td><a href="/cars/new">Dodaj Nowe Auto</a></td>
-        <td><a href="/cars/logout">Wyloguj się</a></td>
+        <%--<td><a href="/cars/logout">Wyloguj się</a></td>--%>
     </tr>
 </table>
 <br>

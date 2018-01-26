@@ -7,6 +7,7 @@ import pl.kostrowski.autosalon.dto.CarDto;
 import pl.kostrowski.autosalon.entity.Car;
 import pl.kostrowski.autosalon.repository.CarRepository;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -48,5 +49,69 @@ public class CarServiceImpl implements CarService {
         Car car = carConverter.convert(carDto);
         carRepository.save(car);
 
+    }
+
+
+    @Override
+    public void deleteCar(Integer id) {
+
+        carRepository.delete(id);
+
+    }
+
+    @Override
+    public List<CarDto> findCarBetweenAge(Integer from, Integer to) {
+
+        if (from == null){
+            from = 0;
+        }
+
+        if (to == null){
+            to = 9999;
+        }
+
+        LocalDate fromDate = LocalDate.now().minusYears(from);
+        LocalDate toDate = LocalDate.now().minusYears(to);
+
+        List<Car> byProductionDateBetween = carRepository.findByProductionDateBetween(toDate, fromDate);
+
+        List<CarDto> result = new LinkedList<>();
+
+        if (!byProductionDateBetween.isEmpty()) {
+
+            for (Car car : byProductionDateBetween) {
+                result.add(carConverter.convert(car));
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public List<CarDto> findCorrectFilters(String brand, String carModel, Integer from, Integer to, String vin) {
+
+        List<CarDto> result = new LinkedList<>();
+
+        List<Car> byBrand = carRepository.findByBrand(brand);
+        List<Car> byModel = carRepository.findByModel(carModel);
+        List<Car> byVin = carRepository.findByVin(vin);
+
+        if (from != null || to != null) {
+            List<CarDto> carBetweenAge = this.findCarBetweenAge(from, to);
+            result.addAll(carBetweenAge);
+        }
+
+        for (Car car : byBrand) {
+            result.add(carConverter.convert(car));
+        }
+
+        for (Car car : byModel) {
+            result.add(carConverter.convert(car));
+        }
+
+        for (Car car : byVin) {
+            result.add(carConverter.convert(car));
+        }
+
+        return result;
     }
 }

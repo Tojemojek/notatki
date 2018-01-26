@@ -3,10 +3,7 @@ package pl.kostrowski.autosalon.web.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import pl.kostrowski.autosalon.dto.CarDto;
 import pl.kostrowski.autosalon.repository.CarRepository;
 import pl.kostrowski.autosalon.service.CarService;
@@ -69,5 +66,27 @@ public class CarWebController {
         return "redirect:/cars/list";
     }
 
+    @RequestMapping(value = "/cars/delete/{id}", method = RequestMethod.GET)
+    public String deleteCar(@PathVariable(value = "id") Integer id) {
 
+        carService.deleteCar(id);
+
+        return "redirect:/cars/list";
+    }
+
+    @RequestMapping(value = "/cars/find/", method = RequestMethod.GET)
+    public String selectCorrectFilter(@RequestParam(value = "brand", required = false) String brand,
+                                      @RequestParam(value = "model", required = false) String carModel,
+                                      @RequestParam(value = "agefrom", required = false) Integer from,
+                                      @RequestParam(value = "ageto", required = false) Integer to,
+                                      @RequestParam(value = "vin", required = false) String vin,
+                                      Map<String, Object> model) {
+
+        
+        model.put("allCars", carService.findCorrectFilters(brand, carModel,from, to, vin));
+        model.put("nowDate", LocalDate.now());
+
+        return "index";
+
+    }
 }

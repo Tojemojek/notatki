@@ -22,7 +22,7 @@
 
 <jsp:include page="menu.jsp"/>
 
-<form action="/cars/list">
+<form action="/cars/find/" method="GET">
     <table border="1">
         <tr>
             <th>Nazwa atrybutu</th>

@@ -1,7 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page isELIgnored="false" %>
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,8 +15,8 @@
 <form action="/products-web/list">
     <table border="1">
         <tr>
-            <th>Nazwa atrybutu</th>
-            <th>Wartość atrybutu</th>
+            <th><spring:message code="form.products.header.text.name"/></th>
+            <th><spring:message code="form.products.header.text.value"/></th>
         </tr>
 
         <tr>
@@ -52,7 +54,7 @@
     <tr>
         <th>Id produktu</th>
         <th>Nazwa produktu</th>
-        <th>Typ productu</th>
+        <th>Typ produktu</th>
         <th>Ilość</th>
         <th>Edytuj</th>
         <th>Usuń produkt</th>

@@ -32,11 +32,10 @@ public class ProductClientImplMockTest {
 
     @Before
     public void setUp() {
-        mockRestServiceServer.expect(requestTo("/products/1"))
+        this.mockRestServiceServer.expect(requestTo("/products/1"))
                 .andRespond(withSuccess(
                         "{\"id\":1,\"name\":\"Co innego\",\"productType\":\"Jedzonko\",\"quantity\":462}", MediaType.APPLICATION_JSON));
     }
-
 
     @Test
     public void findAll() {

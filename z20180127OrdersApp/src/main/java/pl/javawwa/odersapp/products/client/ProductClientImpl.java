@@ -14,7 +14,7 @@ import java.util.List;
 public class ProductClientImpl implements ProductClient {
 
 
-    @Value("@{product.server.address}")
+    @Value("${product.server.address}")
     private String producServiceAddress;
 
     private RestTemplate restTemplate;
